@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import LeaveLayout from "./views/LeaveManagement/LeaveLayout.vue";
 import LeaveHome from "./views/LeaveManagement/LeaveHome.vue";
 import LeaveUserList from "./views/LeaveManagement/LeaveUserList.vue";
-import LeaveNewForm from "./views/LeaveManagement/LeaveNewForm.vue";
-
+import LeaveUserDetail from "./views/LeaveManagement/LeaveUserDetail.vue";
 
 Vue.use(Router)
 
@@ -20,12 +20,18 @@ export default new Router({
     {
       path: "/leavehome",
       name: "LeaveHome",
-      component: LeaveHome,
+      component: LeaveLayout,
+      redirect: "/leavehome/home",
       children: [
         {
-          path: "leavenewform",
-          name: "Leave New Form",
-          component: LeaveNewForm,
+          path: "home",
+          name: "Home",
+          component: LeaveHome,
+        },
+        {
+          path: "leaveuserdetail",
+          name: "LeaveUserDetail",
+          component: LeaveUserDetail,
         },
         {
           path: "timeline",

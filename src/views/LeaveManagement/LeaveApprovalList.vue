@@ -4,16 +4,6 @@
       :headers="headers"
       :items="desserts"
       class="elevation-1">
-      <template slot="headers" slot-scope="props">
-      <tr>
-        <th v-for="header in props.headers"
-          :key="header.text"
-          :class="[(header.value == 'leaveType'|| header.value == 'endDate' || header.value == 'submitDate') ? 'hidden-sm-and-down' : '']">
-          {{ header.text }}
-        </th>
-      </tr>
-      </template>
-
       <template slot="headerCell" slot-scope="props">
         <v-tooltip bottom>
           <span slot="activator">
@@ -26,10 +16,10 @@
       </template>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-left hidden-sm-and-down">{{ props.item.leaveType }}</td>
+        <td class="text-xs-left">{{ props.item.leaveType }}</td>
         <td class="text-xs-left">{{ props.item.startDate }}</td>
-        <td class="text-xs-left hidden-sm-and-down">{{ props.item.endDate }}</td>
-        <td class="text-xs-left hidden-sm-and-down">{{ props.item.submitDate }}</td>
+        <td class="text-xs-left">{{ props.item.endDate }}</td>
+        <td class="text-xs-left">{{ props.item.submitDate }}</td>
         <td class="text-xs-left">{{ props.item.status }}</td>
         <td class="justify-center">
           <v-icon
@@ -50,7 +40,7 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {
   },
 })
-export default class LeaveUserList extends Vue {
+export default class LeaveApprovalList extends Vue {
   public dialog: boolean = false;
   public headers: any[] = [
     {
