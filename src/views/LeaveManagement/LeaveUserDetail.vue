@@ -38,9 +38,9 @@
                         <v-icon>receipt</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
+                          <v-list-tile-sub-title>Leave Type</v-list-tile-sub-title>
                         <v-list-tile-title>Sick Leave</v-list-tile-title>
-                        <v-list-tile-sub-title>Leave Type</v-list-tile-sub-title>
-                      </v-list-tile-content>                      
+                      </v-list-tile-content>
                     </v-list-tile>
 
                     <v-divider inset></v-divider>
@@ -50,16 +50,8 @@
                         <v-icon>event</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
+                        <v-list-tile-sub-title>Period (5 days)</v-list-tile-sub-title>
                         <v-list-tile-title>2018-10-15 &nbsp;<i class="material-icons" style="font-size: 10px">arrow_forward</i>&nbsp; 2018-10-20</v-list-tile-title>
-                        <v-list-tile-sub-title>Period</v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
-
-                    <v-list-tile>
-                      <v-list-tile-action></v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-title>5 days</v-list-tile-title>
-                        <v-list-tile-sub-title>Duration</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
@@ -70,8 +62,8 @@
                         <v-icon>chat</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
-                        <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
                         <v-list-tile-sub-title>Reason</v-list-tile-sub-title>
+                        <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
                   </v-list>
