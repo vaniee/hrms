@@ -6,7 +6,7 @@
       <v-btn icon @click="dialog = true">
         <v-icon>note_add</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon @click="settingDialog = true">
         <v-icon>more_vert</v-icon>
       </v-btn>
 
@@ -16,17 +16,14 @@
               slider-color="yellow">
         <v-tab href="#tab-1">
           Overview
-          <v-icon class="top-negative-3">dashboard</v-icon>
         </v-tab>
 
         <v-tab href="#tab-2">
           My Request
-          <v-icon class="top-negative-3">account_circle</v-icon>
         </v-tab>
 
         <v-tab href="#tab-3">
           Approval
-          <v-icon class="top-negative-3">supervisor_account</v-icon>
         </v-tab>
 
       </v-tabs>
@@ -36,8 +33,12 @@
       <router-view></router-view>
     </v-tabs-items>
 
-    <v-dialog v-model="dialog" persistent max-width="800px">
+    <v-dialog v-model="dialog" persistent max-width="900px">
         <LeaveNewForm @on-button-clicked="onButtonClicked"/>
+    </v-dialog>
+
+    <v-dialog v-model="settingDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <LeaveSetting @on-button-clicked="onSettingButtonClicked"/>>
     </v-dialog>
   </div>
 </template>
@@ -45,14 +46,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import LeaveNewForm from "@/views/LeaveManagement/LeaveNewForm.vue";
+import LeaveSetting from "@/views/LeaveManagement/LeaveSetting.vue";
 
 @Component({
   components: {
-    LeaveNewForm
+    LeaveNewForm, LeaveSetting
   },
 })
 export default class LeaveHome extends Vue {
   public dialog: boolean = false;
+  public settingDialog : boolean = false;
   public tabs: any = null;
 
   constructor() {
@@ -62,11 +65,22 @@ export default class LeaveHome extends Vue {
   public onButtonClicked(dialog: boolean): any {
     this.dialog = dialog;
   }
+
+  public onSettingButtonClicked(dialog: boolean) :any {
+    this.settingDialog = dialog;
+  }
 }
 </script>
 
 <style>
+/*
 .top-negative-3 {
   margin-top: -3px
+}
+*/
+
+.v-menu__content{
+  top: 0 !important;
+  left: -370px !important;
 }
 </style>

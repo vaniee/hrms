@@ -4,7 +4,6 @@ import Home from './views/Home.vue'
 import LeaveLayout from "./views/LeaveManagement/LeaveLayout.vue";
 import LeaveHome from "./views/LeaveManagement/LeaveHome.vue";
 import LeaveUserList from "./views/LeaveManagement/LeaveUserList.vue";
-import LeaveUserDetail from "./views/LeaveManagement/LeaveUserDetail.vue";
 
 Vue.use(Router)
 
@@ -27,11 +26,6 @@ export default new Router({
           path: "home",
           name: "Home",
           component: LeaveHome,
-        },
-        {
-          path: "leaveuserdetail",
-          name: "LeaveUserDetail",
-          component: LeaveUserDetail,
         },
         {
           path: "timeline",

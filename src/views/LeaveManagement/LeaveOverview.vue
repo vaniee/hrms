@@ -1,5 +1,6 @@
 <template>
-  <v-layout row>
+  <v-card>
+    <v-layout row wrap>
     <v-flex xs12 sm12 md6>
         <v-list two-line>
           <template v-for="(item, index) in items">
@@ -12,8 +13,7 @@
             <v-divider
               v-else-if="item.divider"
               :inset="item.inset"
-              :key="index"
-            ></v-divider>
+              :key="index"></v-divider>
 
             <v-list-tile
               v-else
@@ -31,32 +31,35 @@
           </template>
         </v-list>
     </v-flex>
-    <v-flex xs12 sm12 md6>
+    <v-flex xs12 sm12 md6 style="padding: 10px">
         <v-date-picker
-            color="cyan"
-            v-model="noDate"
-            :event-color="date => date[9] % 2 ? 'red' : 'green lighten-1'"
-            :events="checkThatDate"
-            @input="onCalendarSelected()"
-            full-width>
-            </v-date-picker>
+          color="cyan"
+          v-model="noDate"
+          :event-color="date => date[9] % 2 ? 'red' : 'green lighten-1'"
+          :events="checkThatDate"
+          @input="onCalendarSelected()"
+          full-width>
+        </v-date-picker>
 
-            <div v-if="leaveInfoOnDate">
-                <br/>
-                <v-avatar
-                slot="activator"
-                size="36px">
-                <img
-                    v-if="message.avatar"
-                    src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                    alt="Avatar">
-                </v-avatar>
-                &nbsp;
-                <strong v-html="message.name"></strong>
-                <span>{{message.msg}}</span>
-            </div>
+          <div class="leave-info-on-date">
+              <br/>
+              <div v-if="leaveInfoOnDate">
+                  <v-avatar
+                  slot="activator"
+                  size="36px">
+                  <img
+                      v-if="message.avatar"
+                      src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                      alt="Avatar">
+                  </v-avatar>
+                  &nbsp;
+                  <strong v-html="message.name"></strong>
+                  <span>{{message.msg}}</span>
+              </div>
+          </div>
     </v-flex>
   </v-layout>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -85,13 +88,19 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
     title: 'Oui Manan <span class="grey--text text--lighten-1">(Business Trip)</span>',
     subtitle: "<span class='text--primary'>From <b>2018-08-20</b> to <b>2018-08-30</b></span> &mdash; Do you have Paris recommendations? Have you ever been?"
+    },
+    { divider: true, inset: true },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Business Leave)</span>',
+    subtitle: "<span class='text--primary'>From <b>2018-08-15</b> to <b>2018-08-20</b></span> &mdash; I'm going to hang out with our best customer?"
     }
 ];
 public noDate: any;
 public message: any = {
           avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
           name: 'John Leider',
-          msg: ' will be absent on this day'
+          msg: ' is absent on this day'
         }
   public leaveInfoOnDate: boolean = false;
 
@@ -115,3 +124,9 @@ public checkThatDate (date: any) {
 
 }
 </script>
+
+<style>
+.leave-info-on-date {
+    min-height: 60px;
+}
+</style>

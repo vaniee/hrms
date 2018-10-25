@@ -5,11 +5,20 @@
         </v-card-title>
         <v-card-text>
           <v-container grid-list-xl>
-            <v-layout wrap align-center>
+            <v-layout row wrap align-center>
               <v-flex xs12 sm12 md6>
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Apply To"></v-select>
+                <div>
+                  <v-avatar
+                      slot="activator"
+                      size="36px">
+                      <img
+                        v-if="message.avatar"
+                        :src="message.avatar"
+                        alt="Avatar">
+                    </v-avatar>
+                    &nbsp;
+                    <strong v-html="message.name"></strong>
+                </div>
 
                   <v-select
                   :items="['0-17', '18-29', '30-54', '54+']"
@@ -78,15 +87,26 @@
                   <div v-if="leaveInfoOnDate">
                     <br/>
                     <v-avatar
-                    slot="activator"
-                    size="36px">
-                    <img
-                      v-if="message.avatar"
-                      src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                      alt="Avatar">
+                      slot="activator"
+                      size="36px">
+                      <img
+                        v-if="message.avatar"
+                        :src="message.avatar"
+                        alt="Avatar">
                     </v-avatar>
                     &nbsp;
                     <strong v-html="message.name"></strong>
+                    &nbsp;
+                    <v-avatar
+                      slot="activator"
+                      size="36px">
+                      <img
+                        v-if="message.avatar2"
+                        :src="message.avatar2"
+                        alt="Avatar">
+                    </v-avatar>
+                    &nbsp;
+                    <strong v-html="message.name2"></strong>
                     <span>{{message.msg}}</span>
                   </div>
               </v-flex>
@@ -121,7 +141,9 @@ export default class LeaveNewForm extends Vue {
   public message: any = {
           avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
           name: 'John Leider',
-          msg: ' will be absent on this day'
+          avatar2: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          name2: 'Oui Manan',
+          msg: ' are absent on this day'
         }
   public leaveInfoOnDate: boolean = false;
 
