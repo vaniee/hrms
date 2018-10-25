@@ -1,87 +1,129 @@
 <template>
     <v-card>
-        <v-card-title>
-          <span class="headline">Leave Request Detail</span>
-        </v-card-title>
+        <v-toolbar>
+          <v-toolbar-title>
+            <v-avatar
+              slot="activator"
+              size="45px">
+              <img v-if="message.avatar"
+                :src="message.avatar"
+                alt="Avatar">
+            </v-avatar>
+              &nbsp;
+            <strong v-html="message.name"></strong>
+            <div class="sub-info">2018-10-21 14:29:01</div>
+          </v-toolbar-title>
+          <v-chip outline color="teal">
+              <v-avatar>
+                <v-icon>check_circle</v-icon>
+              </v-avatar>
+              Approved
+            </v-chip>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn icon @click="saveOrCloseClicked()">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
         <v-card-text>
           <v-container grid-list-xl>
-            <v-layout row wrap align-center>
+            <v-layout row wrap>
               <v-flex xs12 sm12 md6>
-                <div>
-                  <v-avatar
-                      slot="activator"
-                      size="36px">
-                      <img
-                        v-if="message.avatar"
-                        :src="message.avatar"
-                        alt="Avatar">
-                    </v-avatar>
-                    &nbsp;
-                    <strong v-html="message.name"></strong>
-                </div>
+                
+                  <v-list two-line>
+                    <v-subheader class="subheading">Information</v-subheader>
+                    <v-list-tile >
+                      <v-list-tile-action>
+                        <v-icon>receipt</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>Sick Leave</v-list-tile-title>
+                        <v-list-tile-sub-title>Leave Type</v-list-tile-sub-title>
+                      </v-list-tile-content>                      
+                    </v-list-tile>
 
-                  <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Leave Type"></v-select>
+                    <v-divider inset></v-divider>
 
-                  <v-dialog
-                  ref="dialog"
-                  v-model="modal"
-                  :return-value.sync="date"
-                  persistent
-                  lazy
-                  full-width
-                  width="290px">
-                  <v-text-field
-                    slot="activator"
-                    v-model="date"
-                    label="Picker in dialog"
-                    prepend-icon="event"
-                    readonly>
-                  </v-text-field>
-                  <v-date-picker v-model="date" scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-                  </v-date-picker>
-                </v-dialog>
+                    <v-list-tile >
+                      <v-list-tile-action>
+                        <v-icon>event</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>2018-10-15 &nbsp;<i class="material-icons" style="font-size: 10px">arrow_forward</i>&nbsp; 2018-10-20</v-list-tile-title>
+                        <v-list-tile-sub-title>Period</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
 
-                <v-dialog
-                  ref="dialog2"
-                  v-model="modal2"
-                  :return-value.sync="date2"
-                  persistent
-                  lazy
-                  full-width
-                  width="290px">
-                  <v-text-field
-                    slot="activator"
-                    v-model="date2"
-                    label="Picker in dialog"
-                    prepend-icon="event"
-                    readonly>
-                  </v-text-field>
-                  <v-date-picker v-model="date2" scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.dialog2.save(date2)">OK</v-btn>
-                  </v-date-picker>
-                </v-dialog>
+                    <v-list-tile>
+                      <v-list-tile-action></v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>5 days</v-list-tile-title>
+                        <v-list-tile-sub-title>Duration</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
 
-                 <v-textarea
-                    label="Reason"
-                    value=""
-                    hint="Type the reason for request"></v-textarea>
+                    <v-divider inset></v-divider>
+
+                    <v-list-tile >
+                      <v-list-tile-action>
+                        <v-icon>chat</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
+                        <v-list-tile-sub-title>Reason</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                
+
+                <v-list two-line>
+                  <template v-for="(item, index) in items">
+                    <v-subheader class="subheading"
+                      v-if="item.header"
+                      :key="item.header">
+                      {{ item.header }}
+                    </v-subheader>
+
+                    <v-divider
+                      v-else-if="item.divider"
+                      :inset="item.inset"
+                      :key="index"></v-divider>
+
+                    <v-list-tile
+                      v-else
+                      :key="item.title"
+                      avatar>
+                      <v-list-tile-avatar>
+                        <img :src="item.avatar">
+                      </v-list-tile-avatar>
+                      <v-tooltip v-model="item.showComment" left max-width="200">
+                          <span>{{item.comment}}</span>
+                      </v-tooltip>
+                      <v-list-tile-content>
+                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                        <v-list-tile-sub-title>
+                          <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
+                        </v-list-tile-sub-title>
+                      </v-list-tile-content>
+
+                      <v-icon color="green darken-2">check</v-icon>
+                    </v-list-tile>
+                  </template>
+                </v-list>
               </v-flex>
 
               <v-flex xs12 sm12 md6>
                   <v-date-picker
+                    readonly
                     color="cyan"
                     v-model="noDate"
                     :events="checkThatDate"
-                    :event-color="d => (d >= date && d <= date2) ? 'red' : 'green lighten-1'"
+                    :event-color="'green lighten-1'"
                     @input="onCalendarSelected()"
-                    full-width>
+                    full-width
+                    class="margin-top-20">
                   </v-date-picker>
 
                   <div v-if="leaveInfoOnDate">
@@ -112,13 +154,7 @@
               </v-flex>
             </v-layout>
         </v-container>
-        
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Submit</v-btn>
-        </v-card-actions>
       </v-card>
 </template>
 
@@ -129,14 +165,9 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {
   },
 })
-export default class LeaveNewForm extends Vue {
+export default class LeaveUserDetail extends Vue {
   public newFormdialog: boolean = false;
   public noDate: any;
-
-  public date: any;
-  public date2: any;
-  public modal: boolean = false;
-  public modal2: boolean = false;
 
   public message: any = {
           avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -147,12 +178,37 @@ export default class LeaveNewForm extends Vue {
         }
   public leaveInfoOnDate: boolean = false;
 
+public items: any[] = [
+    { header: 'History' },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Team Leader)</span>',
+    subtitle: "2018-10-19 14:29:01",
+    showComment: false,
+    comment: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+    },
+    { divider: true, inset: true },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+    title: 'Adam Khoo <span class="grey--text text--lighten-1">(Project Manager)</span>',
+    subtitle: "2018-10-19 14:29:01",
+    showComment: false,
+    comment: "Wish I could come, but I'm out of town this weekend.",
+    },
+    { divider: true, inset: true },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+    title: 'Oui Manan <span class="grey--text text--lighten-1">(HR Department)</span>',
+    subtitle: "2018-10-19 14:29:01",
+    showComment: false,
+    comment: "Do you have Paris recommendations? Have you ever been?",
+    }
+];
+
   constructor() {
     super();
 
     this.noDate = null;
-    this.date = null;
-    this.date2 = null;
   }
 
   public mounted() {
@@ -169,7 +225,7 @@ export default class LeaveNewForm extends Vue {
 
   public checkThatDate (date: any) {
         const [,, day] = date.split('-')
-        return parseInt(day, 10) % 4 === 0 // some days have been booked by other employee
+        return (parseInt(day, 10) === 18 || parseInt(day, 10) === 19 || parseInt(day, 10) === 20) // some days have been booked by other employee
       }
 
   public saveOrCloseClicked() {
@@ -178,6 +234,24 @@ export default class LeaveNewForm extends Vue {
 }
 </script>
 
-<style>
+<style lang="less">
+.v-toolbar {
+  .sub-info {
+    font-size: 13px;
+    margin-top: -15px;
+    padding-left: 62px;
+  }
+}
 
+.v-tooltip {
+  .v-tooltip__content {
+    margin-left: 20px;
+    min-width: 200px;
+    font-size: 14px;
+  }
+}
+
+.margin-top-20{
+  margin-top: 20px;
+}
 </style>

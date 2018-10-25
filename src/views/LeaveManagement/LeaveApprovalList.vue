@@ -96,7 +96,7 @@
     </v-data-table>
 
     <v-dialog v-model="detailDialog" persistent max-width="900px">
-        <LeaveUserDetail @on-button-clicked="onButtonClicked"/>
+        <LeaveApprovalDetail @on-button-clicked="onButtonClicked"/>
     </v-dialog>
 
     <v-dialog v-model="searchBoxDialog" persistent max-width="500px">
@@ -108,12 +108,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import LeaveUserDetail from "@/views/LeaveManagement/LeaveUserDetail.vue";
 import LeaveSearchBox from "@/views/LeaveManagement/LeaveSearchBox.vue";
+import LeaveApprovalDetail from "@/views/LeaveManagement/LeaveApprovalDetail.vue";
 
 @Component({
   components: {
-    LeaveUserDetail, LeaveSearchBox
+    LeaveSearchBox, LeaveApprovalDetail
   },
 })
 export default class LeaveApprovalList extends Vue {
