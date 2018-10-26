@@ -22,10 +22,15 @@
               <v-list-tile-avatar>
                 <img :src="item.avatar">
               </v-list-tile-avatar>
-
+              <v-tooltip v-model="item.showComment" left max-width="200">
+                  <span>{{item.comment}}</span>
+              </v-tooltip>
               <v-list-tile-content>
                 <v-list-tile-title v-html="item.title"></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                <v-list-tile-sub-title>
+                          <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
+                        </v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
           </template>
@@ -43,19 +48,21 @@
 
           <div class="leave-info-on-date">
               <br/>
-              <div v-if="leaveInfoOnDate">
+              <template v-if="leaveInfoOnDate">
+                <span v-for="msg in message" :key="msg.name" class="user-item">
                   <v-avatar
                   slot="activator"
                   size="36px">
                   <img
-                      v-if="message.avatar"
-                      src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                      v-if="msg.avatar"
+                      :src="msg.avatar"
                       alt="Avatar">
                   </v-avatar>
                   &nbsp;
-                  <strong v-html="message.name"></strong>
-                  <span>{{message.msg}}</span>
-              </div>
+                  <strong v-html="msg.name"></strong>
+                  <span>{{msg.msg}}</span>
+                </span>
+              </template>
           </div>
     </v-flex>
   </v-layout>
@@ -75,34 +82,59 @@ public items: any[] = [
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     title: 'Anan Khafli <span class="grey--text text--lighten-1">(Sick Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-11-20</b> to <b>2018-11-22</b></span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+    subtitle: "2018-10-19 14:29:01",
+    showComment: false,
+    comment: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
     title: 'Adam Khoo <span class="grey--text text--lighten-1">(Vacation Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-09-02</b> to <b>2018-09-13</b></span> &mdash; Wish I could come, but I'm out of town this weekend."
+    subtitle: "2018-10-11 14:29:08",
+    showComment: false,
+    comment: "Wish I could come, but I'm out of town this weekend.",
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    title: 'Oui Manan <span class="grey--text text--lighten-1">(Business Trip)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-08-20</b> to <b>2018-08-30</b></span> &mdash; Do you have Paris recommendations? Have you ever been?"
+    title: 'Oui Manan <span class="grey--text text--lighten-1">(Sick Leave)</span>',
+    subtitle: "2018-10-02 14:29:36",
+    showComment: false,
+    comment: "Do you have Paris recommendations? Have you ever been?",
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     title: 'Anan Khafli <span class="grey--text text--lighten-1">(Business Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-08-15</b> to <b>2018-08-20</b></span> &mdash; I'm going to hang out with our best customer?"
+    subtitle: "2018-09-03 08:29:01",
+    showComment: false,
+    comment: "I'll be in your neighborhood doing errands this weekend.",
+    },
+    { divider: true, inset: true },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+    title: 'Ali Connors <span class="grey--text text--lighten-1">(Business Leave)</span>',
+    subtitle: "2018-09-01 10:02:20",
+    showComment: false,
+    comment: "I'll be in your neighborhood doing errands this weekend.",
     }
 ];
 public noDate: any;
-public message: any = {
-          avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          name: 'John Leider',
-          msg: ' is absent on this day'
-        }
-  public leaveInfoOnDate: boolean = false;
+public message: any =[ 
+  {
+    avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+    name: 'John Leider',
+    msg: ' (Sick Leave)'
+  },
+  {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+    name: 'Anaa Khafli',
+    msg: ' (Vacation Leave)'
+  }
+]
+public leaveInfoOnDate: boolean = false;
+
+public markedDates: number[] =[3, 4, 5, 11, 12, 13, 14, 15, 26, 27];
 
 constructor() {
     super();
@@ -119,14 +151,21 @@ public onCalendarSelected() {
 
 public checkThatDate (date: any) {
     const [,, day] = date.split('-')
-    return parseInt(day, 10) % 3 === 0 // some days have been booked by other employee
+    var result = this.markedDates.filter((d) => d == parseInt(day, 10));
+    if(result.length > 0){
+      return true;
+    }
+    return false;
 }
 
 }
 </script>
 
-<style>
+<style lang="less">
 .leave-info-on-date {
     min-height: 60px;
+    .user-item{
+      margin-left: 5px;
+    }
 }
 </style>

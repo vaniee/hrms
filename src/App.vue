@@ -6,11 +6,11 @@
         <router-link to="/claimhome">Claim Management</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <v-content>
       <v-container fluid>
-        <router-view/>
+        <v-app>
+          <router-view/>
+        </v-app>
       </v-container>
-    </v-content>
   </div>
 </template>
 

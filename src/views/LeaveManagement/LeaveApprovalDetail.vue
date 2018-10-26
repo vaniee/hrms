@@ -21,6 +21,19 @@
             </v-chip>
           <v-spacer></v-spacer>
           <v-toolbar-items>
+            <v-menu bottom left>
+            <v-btn slot="activator" icon>
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile
+                v-for="(item, i) in actions"
+                :key="i">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+
             <v-btn icon @click="saveOrCloseClicked()">
               <v-icon>close</v-icon>
             </v-btn>
@@ -118,31 +131,35 @@
                     class="margin-top-20">
                   </v-date-picker>
 
-                  <div v-if="leaveInfoOnDate">
-                    <br/>
-                    <v-avatar
-                      slot="activator"
-                      size="36px">
-                      <img
-                        v-if="message.avatar"
-                        :src="message.avatar"
-                        alt="Avatar">
-                    </v-avatar>
-                    &nbsp;
-                    <strong v-html="message.name"></strong>
-                    &nbsp;
-                    <v-avatar
-                      slot="activator"
-                      size="36px">
-                      <img
-                        v-if="message.avatar2"
-                        :src="message.avatar2"
-                        alt="Avatar">
-                    </v-avatar>
-                    &nbsp;
-                    <strong v-html="message.name2"></strong>
-                    <span>{{message.msg}}</span>
-                  </div>
+                  <v-list two-line>
+                  <template v-for="(item, index) in itemsForCalendar">
+                    <v-subheader class="subheading"
+                      v-if="item.header"
+                      :key="item.header">
+                      {{ item.header }}
+                    </v-subheader>
+
+                    <v-divider
+                      v-else-if="item.divider"
+                      :inset="item.inset"
+                      :key="index"></v-divider>
+
+                    <v-list-tile
+                      v-else
+                      :key="item.title"
+                      avatar>
+                      <v-list-tile-avatar>
+                        <img :src="item.avatar">
+                      </v-list-tile-avatar>
+                      <v-list-tile-content>
+                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                      </v-list-tile-content>
+
+                      <v-icon :color="item.color">{{item.status}}</v-icon>
+                    </v-list-tile>
+                  </template>
+                </v-list>
               </v-flex>
 
               <v-flex sx12 sm12 md12>
@@ -180,7 +197,7 @@ export default class LeaveApprovalDetail extends Vue {
           name2: 'Oui Manan',
           msg: ' are absent on this day'
         }
-  public leaveInfoOnDate: boolean = false;
+  public markedDates: number[] =[15, 16, 17, 18, 19, 20];
 
 public items: any[] = [
     { header: 'History' },
@@ -209,6 +226,30 @@ public items: any[] = [
     }
 ];
 
+public itemsForCalendar: any[] = [
+    { header: 'Team Leaves' },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+    title: 'Ali Connors <span class="grey--text text--lighten-1">(Sick Leave)</span>',
+    subtitle: "2018-10-17",
+    status: 'check',
+    color: 'green darken-2'
+    },
+    { divider: true, inset: true },
+    {
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+    title: 'Travis Howard <span class="grey--text text--lighten-1">(Vacation Leave)</span>',
+    subtitle: "2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
+    status: 'update',
+    color: 'lime darken-1'
+    }
+];
+
+public actions: any[] = [
+        { title: 'Edit' },
+        { title: 'Delete' }
+      ];
+
   constructor() {
     super();
 
@@ -219,18 +260,14 @@ public items: any[] = [
    
   }
 
-  public onCalendarSelected() {
-    if (this.checkThatDate(this.noDate)) {
-      this.leaveInfoOnDate = true;
-    } else {
-      this.leaveInfoOnDate = false;
-    }
-  }
-
   public checkThatDate (date: any) {
-        const [,, day] = date.split('-')
-        return (parseInt(day, 10) === 18 || parseInt(day, 10) === 19 || parseInt(day, 10) === 20) // some days have been booked by other employee
-      }
+    const [,, day] = date.split('-')
+    var result = this.markedDates.filter((d) => d == parseInt(day, 10));
+    if(result.length > 0){
+      return true;
+    }
+    return false;
+  }
 
   public saveOrCloseClicked() {
     this.$emit("on-button-clicked", this.newFormdialog);

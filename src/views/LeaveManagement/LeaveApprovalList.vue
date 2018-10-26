@@ -70,13 +70,10 @@
       <template slot="expand" slot-scope="props">
       <v-card flat>
         <v-card-text>
-          <v-avatar
-              slot="activator"
-              size="36px">
-              <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                alt="Avatar">
-          </v-avatar>
-          <span> Johnathan Frozen Yogurt: "Wish I could come, but I'm out of town this weekend."</span>
+          <v-icon style="font-size: 20px">chat</v-icon>
+          <span> 
+           "Wish I could come, but I'm out of town this weekend."
+          </span>
         </v-card-text>
 
         <v-layout wrap class="brief-info">
@@ -86,8 +83,8 @@
             </v-text-field>
           </v-flex>
           <v-flex xs12 sm6 md3 text-xs-right text-sm-right text-md-right>
-            <v-btn color="btn-success-important" @click="props.expanded = false">Approve</v-btn>
-            <v-btn color="btn-error-important" @click="props.expanded = false">Reject</v-btn>
+            <v-btn flat color="green" @click="props.expanded = false">Approve</v-btn>
+            <v-btn flat color="red" @click="props.expanded = false">Reject</v-btn>
           </v-flex>
         </v-layout>
 
@@ -290,18 +287,6 @@ export default class LeaveApprovalList extends Vue {
 
 .clickable{
   cursor: pointer;
-}
-
-.btn-success-important {
-  color: white !important;
-  background-color: #4caf50 !important;
-  border-color: #4caf50 !important;
-}
-
-.btn-error-important {
-  color: white !important;
-  background-color: #ff5252 !important;
-  border-color: #ff5252 !important; 
 }
 
 .brief-info{
