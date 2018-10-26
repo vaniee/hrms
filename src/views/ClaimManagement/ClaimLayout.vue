@@ -78,9 +78,4 @@ export default class ClaimHome extends Vue {
   margin-top: -3px
 }
 */
-
-.v-menu__content{
-  top: 0 !important;
-  left: -370px !important;
-}
 </style>
