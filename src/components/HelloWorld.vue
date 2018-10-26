@@ -8,8 +8,7 @@
       <v-breadcrumbs-item
         v-for="item in items"
         :disabled="item.disabled"
-        :key="item.text"
-      >
+        :key="item.text">
         {{ item.text }}
       </v-breadcrumbs-item>
     </v-breadcrumbs>
@@ -20,8 +19,7 @@
       <v-breadcrumbs-item
         v-for="item in items"
         :disabled="item.disabled"
-        :key="item.text"
-      >
+        :key="item.text">
         {{ item.text }}
       </v-breadcrumbs-item>
     </v-breadcrumbs>

@@ -38,7 +38,7 @@
     </v-dialog>
 
     <v-dialog v-model="settingDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <LeaveSetting @on-button-clicked="onSettingButtonClicked"/>>
+        <LeaveSetting @on-button-clicked="onSettingButtonClicked"/>
     </v-dialog>
   </div>
 </template>
