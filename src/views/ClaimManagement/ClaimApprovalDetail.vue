@@ -37,7 +37,7 @@
         </v-tab>
       </v-tabs>
         </v-toolbar>
-        <v-tabs-items v-model="tab">
+        <v-tabs-items v-model="tabs">
           <v-tab-item id ="tab-1">
         <v-card-text>
           <v-container grid-list-xl>
@@ -145,7 +145,12 @@
         </v-container>
         </v-card-text>
         </v-tab-item>
+
+        <v-tab-item id ="tab-2">
+          dfg
+        </v-tab-item>
         </v-tabs-items>
+        
         
       </v-card>
 </template>
@@ -205,7 +210,7 @@ public items2: any[] = [
           { icon: 'assignment', iconClass: 'blue white--text', title: 'Invoice', subtitle: 'Jan 20, 2014' },
           { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Recipient', subtitle: 'Jan 10, 2014' }
         ]
-public tabs:null;
+public tabs: string = 'tab-1';
 
   constructor() {
     super();
