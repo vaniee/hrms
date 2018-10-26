@@ -119,7 +119,7 @@
             <v-flex xs12>
                 <div>
                   <h3>Upload Document</h3>
-                    <input type="file" >
+                    <input type="file">
                 </div>
             </v-flex>
             

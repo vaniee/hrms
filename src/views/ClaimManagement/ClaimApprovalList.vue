@@ -85,10 +85,10 @@
               label="Comment">
             </v-text-field>
           </v-flex>
-          <v-flex xs12 sm6 md3 text-xs-right text-sm-right text-md-right>
-            <v-btn color="btn-success-important" @click="props.expanded = false">Approve</v-btn>
-            <v-btn color="btn-error-important" @click="props.expanded = false">Reject</v-btn>
-          </v-flex>
+         <v-flex xs12 sm6 md3 text-xs-right text-sm-right text-md-right>
+            <v-btn flat color="green" @click="props.expanded = false">Approve</v-btn>
+            <v-btn flat color="red" @click="props.expanded = false">Reject</v-btn>
+</v-flex>
         </v-layout>
 
       </v-card>
@@ -307,5 +307,10 @@ export default class ClaimApprovalList extends Vue {
 .brief-info{
   padding-left: 15px;
   padding-right: 15px;
+}
+.request-buttons{
+    .v-btn{
+        margin: 0;
+    }
 }
 </style>

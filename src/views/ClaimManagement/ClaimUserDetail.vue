@@ -26,20 +26,30 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-card-text>
+  <v-card-text>
           <v-container grid-list-xl>
             <v-layout row wrap>
-              <v-flex xs12 sm12 md6>
-                
+              <v-flex xs12>
                   <v-list two-line>
-                    <v-subheader class="subheading">Information</v-subheader>
+                    <v-list-tile >
+                      <v-list-tile-action>
+                        <v-icon>person</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                          <v-list-tile-sub-title>Apply To</v-list-tile-sub-title>
+                        <v-list-tile-title>Anan Khafli</v-list-tile-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+
+                     <v-divider inset></v-divider>
+                     
                     <v-list-tile >
                       <v-list-tile-action>
                         <v-icon>receipt</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
                           <v-list-tile-sub-title>Claim Type</v-list-tile-sub-title>
-                        <v-list-tile-title>Sick Claim</v-list-tile-title>
+                        <v-list-tile-title>Business Trip</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
@@ -50,92 +60,47 @@
                         <v-icon>attach_money</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
-                        <v-list-tile-sub-title>Total(VND)</v-list-tile-sub-title>
-                        <v-list-tile-title>9000000000</v-list-tile-title>
+                        <v-list-tile-sub-title>Total (VND)</v-list-tile-sub-title>
+                        <v-list-tile-title>90000000000</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
                     <v-divider inset></v-divider>
 
-                    <v-list-tile >
+                    <v-list-tile xs6 sm4>
+                      
+                      <v-list-tile-action>
+                        <v-icon>date_range</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-sub-title>Application Date</v-list-tile-sub-title>
+                        <v-list-tile-title>2018-10-26</v-list-tile-title>
+                      </v-list-tile-content>
+                    
+                    </v-list-tile>
+                    <v-divider inset></v-divider>
+
+                    <v-list-tile xs6 sm4>
+                      
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
                         <v-list-tile-sub-title>Expense Date</v-list-tile-sub-title>
-                        <v-list-tile-title>2018-10-30</v-list-tile-title>
+                        <v-list-tile-title>2018-10-26</v-list-tile-title>
                       </v-list-tile-content>
+                    
                     </v-list-tile>
-                  </v-list>
-                
-
-                <v-list two-line>
-                  <template v-for="(item, index) in items">
-                    <v-subheader class="subheading"
-                      v-if="item.header"
-                      :key="item.header">
-                      {{ item.header }}
-                    </v-subheader>
-
-                    <v-divider
-                      v-else-if="item.divider"
-                      :inset="item.inset"
-                      :key="index"></v-divider>
-
-                    <v-list-tile
-                      v-else
-                      :key="item.title"
-                      avatar>
-                      <v-list-tile-avatar>
-                        <img :src="item.avatar">
-                      </v-list-tile-avatar>
-                      <v-tooltip v-model="item.showComment" left max-width="200">
-                          <span>{{item.comment}}</span>
-                      </v-tooltip>
+                    <v-list-tile xs6 sm4>
+                      <v-list-tile-action>
+                        <v-icon>list</v-icon>
+                      </v-list-tile-action>
                       <v-list-tile-content>
-                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                        <v-list-tile-sub-title>
-                          <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
-                        </v-list-tile-sub-title>
+                        <v-list-tile-sub-title>Expense Item</v-list-tile-sub-title>
+                        <v-list-tile-title>Food</v-list-tile-title>
                       </v-list-tile-content>
-
-                      <v-icon color="green darken-2">check</v-icon>
                     </v-list-tile>
-                  </template>
-                </v-list>
-              </v-flex>
-
-               <v-flex xs12 sm12 md6>   
-      <v-card>
-        <v-list two-line subheader>
-         <v-toolbar color="light-blue" dark>
-
-          <v-toolbar-title>Attachment</v-toolbar-title>
-
-          <v-spacer></v-spacer>
-          
-          <v-btn icon>
-            <v-icon>info</v-icon>
-          </v-btn>
-        </v-toolbar>
-          <v-list-tile
-            v-for="item in items1"
-            :key="item.title"
-            avatar
-          >
-            <v-list-tile-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider inset></v-divider>
-
-          <v-subheader inset>Files</v-subheader>
+                   <v-toolbar-title>Files</v-toolbar-title>
 
           <v-list-tile
             v-for="item in items2"
@@ -153,10 +118,9 @@
             </v-list-tile-content>
           </v-list-tile>
           
-        </v-list>
-        <v-spacer></v-spacer>
-      </v-card>
+        </v-list>               
               </v-flex>
+              
             </v-layout>
         </v-container>
         </v-card-text>
@@ -215,8 +179,8 @@ public items1: any[] = [
           { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Work', subtitle: 'Jan 28, 2014' }
         ];
 public items2: any[] = [
-          { icon: 'assignment', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
-          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' }
+          { icon: 'assignment', iconClass: 'blue white--text', title: 'Invoice', subtitle: 'Jan 20, 2014' },
+          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Receipt', subtitle: 'Jan 10, 2014' }
         ];
 
   constructor() {

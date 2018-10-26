@@ -106,7 +106,7 @@ export default class ClaimUserList extends Vue {
       name: 'Johnathan Frozen Yogurt',
       startDate: "2018-09-15",
       endDate: "2018-09-18",
-      claimType: "Sick Leave",
+      claimType: "Insurance",
       total: "2018-09-19",
       status: 'Approved'
     },
@@ -115,7 +115,7 @@ export default class ClaimUserList extends Vue {
       name: 'Ice cream sandwich',
       startDate: "2018-09-12",
       endDate: "2018-09-18",
-      claimType: "Vacation Leave",
+      claimType: "Others",
       total: "2018-09-19",
       status: 'Pending'
     },
@@ -124,7 +124,7 @@ export default class ClaimUserList extends Vue {
       name: 'Margaret E. Gillespie',
       startDate: "2018-08-01",
       endDate: "2018-09-18",
-      claimType: "Sick Leave",
+      claimType: "Business Trip",
       total: "2018-09-19",
       status: 'Under Review'
     },
@@ -133,7 +133,7 @@ export default class ClaimUserList extends Vue {
       name: 'Darrel K. Nieves',
       startDate: "2018-02-25",
       endDate: "2018-09-18",
-      claimType: "Vacation Leave",
+      claimType: "Insurance",
       total: "2018-09-19",
       status: 'Approved'
     },
@@ -142,7 +142,7 @@ export default class ClaimUserList extends Vue {
       name: 'Adrian Merrill',
       startDate: "2018-09-12",
       endDate: "2018-09-18",
-      claimType: "Sick Leave",
+      claimType: "Insurance",
       total: "2018-09-19",
       status: 'Rejected'
     },
@@ -160,7 +160,7 @@ export default class ClaimUserList extends Vue {
       name: 'Moses Mcconnell',
       startDate: "2018-10-12",
       endDate: "2018-09-18",
-      claimType: "Vacation Leave",
+      claimType: "Business Trip",
       total: "2018-09-19",
       status: 'Pending'
     },
@@ -169,7 +169,7 @@ export default class ClaimUserList extends Vue {
       name: 'Honeycomb',
       startDate: "2018-10-12",
       endDate: "2018-09-18",
-      claimType: "Sick Leave",
+      claimType: "Business Trip",
       total: "2018-09-19",
       status: 'Rejected'
     },
@@ -178,7 +178,7 @@ export default class ClaimUserList extends Vue {
       name: 'Moses C. Molina',
       startDate: "2018-10-05",
       endDate: "2018-09-18",
-      claimType: "Sick Leave",
+      claimType: "Business Trip",
       total: "2018-09-19",
       status: 'Pending'
     },
