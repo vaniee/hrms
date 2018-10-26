@@ -22,16 +22,17 @@
               <v-list-tile-avatar>
                 <img :src="item.avatar">
               </v-list-tile-avatar>
-              <v-tooltip v-model="item.showComment" left max-width="200">
-                  <span>{{item.comment}}</span>
-              </v-tooltip>
               <v-list-tile-content>
                 <v-list-tile-title v-html="item.title"></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
                 <v-list-tile-sub-title>
-                          <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
-                        </v-list-tile-sub-title>
+                  <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
+                </v-list-tile-sub-title>
               </v-list-tile-content>
+              <v-tooltip v-model="item.showComment" left max-width="180">
+                  <span slot="activator">&nbsp;</span>
+                  <span>{{item.comment}}</span>
+              </v-tooltip>
             </v-list-tile>
           </template>
         </v-list>

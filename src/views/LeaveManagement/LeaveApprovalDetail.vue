@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-toolbar>
+        <v-toolbar color="white" tabs>
           <v-toolbar-title>
             <v-avatar
               slot="activator"
@@ -33,148 +33,161 @@
               </v-list-tile>
             </v-list>
           </v-menu>
-
             <v-btn icon @click="saveOrCloseClicked()">
               <v-icon>close</v-icon>
             </v-btn>
           </v-toolbar-items>
+          <v-tabs v-model="tabs"
+            slot="extension"
+            slider-color="yellow">
+            <v-tab href="#tab-1">
+              Information
+            </v-tab>
+
+            <v-tab href="#tab-2">
+              History
+            </v-tab>
+          </v-tabs>
         </v-toolbar>
         <v-card-text>
-          <v-container grid-list-xl>
-            <v-layout row wrap>
-              <v-flex xs12 sm12 md6>
-                
-                  <v-list two-line>
-                    <v-subheader class="subheading">Information</v-subheader>
-                    <v-list-tile >
-                      <v-list-tile-action>
-                        <v-icon>receipt</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                          <v-list-tile-sub-title>Leave Type</v-list-tile-sub-title>
-                        <v-list-tile-title>Sick Leave</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
+          <v-tabs-items v-model="tabs">
+            <v-tab-item :id="'tab-' + 1">
+              <v-layout row wrap>
+                <v-flex xs12 sm12 md6>
+                  
+                    <v-list two-line>
+                      <v-list-tile >
+                        <v-list-tile-action>
+                          <v-icon>receipt</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-sub-title>Leave Type</v-list-tile-sub-title>
+                          <v-list-tile-title>Sick Leave</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
 
-                    <v-divider inset></v-divider>
+                      <v-divider inset></v-divider>
 
-                    <v-list-tile >
-                      <v-list-tile-action>
-                        <v-icon>event</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-sub-title>Period (5 days)</v-list-tile-sub-title>
-                        <v-list-tile-title>2018-10-15 &nbsp;<i class="material-icons" style="font-size: 10px">arrow_forward</i>&nbsp; 2018-10-20</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      <v-list-tile >
+                        <v-list-tile-action>
+                          <v-icon>event</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-sub-title>Period (5 days)</v-list-tile-sub-title>
+                          <v-list-tile-title>2018-10-15 &nbsp;<i class="material-icons" style="font-size: 10px">arrow_forward</i>&nbsp; 2018-10-20</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
 
-                    <v-divider inset></v-divider>
+                      <v-divider inset></v-divider>
 
-                    <v-list-tile >
-                      <v-list-tile-action>
-                        <v-icon>chat</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-sub-title>Reason</v-list-tile-sub-title>
-                        <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      <v-list-tile >
+                        <v-list-tile-action>
+                          <v-icon>chat</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-sub-title>Reason</v-list-tile-sub-title>
+                          <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+
+                </v-flex>
+                <v-flex xs12 sm12 md6>
+                    <v-date-picker
+                      readonly
+                      color="cyan"
+                      v-model="noDate"
+                      :events="checkThatDate"
+                      :event-color="'green lighten-1'"
+                      @input="onCalendarSelected()"
+                      full-width
+                      class="margin-top-20">
+                    </v-date-picker>
+
+                    <v-list two-line>
+                    <template v-for="(item, index) in itemsForCalendar">
+                      <v-subheader class="subheading"
+                        v-if="item.header"
+                        :key="item.header">
+                        {{ item.header }}
+                      </v-subheader>
+
+                      <v-divider
+                        v-else-if="item.divider"
+                        :inset="item.inset"
+                        :key="index"></v-divider>
+
+                      <v-list-tile
+                        v-else
+                        :key="item.title"
+                        avatar>
+                        <v-list-tile-avatar>
+                          <img :src="item.avatar">
+                        </v-list-tile-avatar>
+                        <v-list-tile-content>
+                          <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                          <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                        </v-list-tile-content>
+
+                        <v-icon :color="item.color">{{item.status}}</v-icon>
+                      </v-list-tile>
+                    </template>
                   </v-list>
-                
+                </v-flex>
+                <v-flex sx12 sm12 md12>
+                    <v-text-field
+                          label="Comment"
+                          placeholder="Write your comment here">
+                  </v-text-field>
+                  
+                  <div class="text-xs-right text-sm-right text-md-right request-buttons">
+                      <v-btn color="red" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Reject</v-btn>
+                      <v-btn color="green" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Approve</v-btn>
+                  </div>
+                </v-flex>
+              </v-layout>
+            </v-tab-item>
+            <v-tab-item :id="'tab-' + 2">
+              <v-list two-line>
+                <template v-for="(item, index) in items">
+                  <v-subheader class="subheading"
+                    v-if="item.header"
+                    :key="item.header">
+                    {{ item.header }}
+                  </v-subheader>
 
-                <v-list two-line>
-                  <template v-for="(item, index) in items">
-                    <v-subheader class="subheading"
-                      v-if="item.header"
-                      :key="item.header">
-                      {{ item.header }}
-                    </v-subheader>
+                  <v-divider
+                    v-else-if="item.divider"
+                    :inset="item.inset"
+                    :key="index"></v-divider>
 
-                    <v-divider
-                      v-else-if="item.divider"
-                      :inset="item.inset"
-                      :key="index"></v-divider>
+                  <v-list-tile
+                    v-else
+                    :key="item.title"
+                    avatar>
+                    <v-list-tile-avatar>
+                      <img :src="item.avatar">
+                    </v-list-tile-avatar>
 
-                    <v-list-tile
-                      v-else
-                      :key="item.title"
-                      avatar>
-                      <v-list-tile-avatar>
-                        <img :src="item.avatar">
-                      </v-list-tile-avatar>
-                      <v-tooltip v-model="item.showComment" left max-width="200">
-                          <span>{{item.comment}}</span>
-                      </v-tooltip>
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                        <v-list-tile-sub-title>
-                          <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
-                        </v-list-tile-sub-title>
-                      </v-list-tile-content>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                      <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                      <v-list-tile-sub-title>
+                        <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
+                      </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                    <v-tooltip v-model="item.showComment" left max-width="180">
+                        <span slot="activator">&nbsp;</span>
+                        <span>{{item.comment}}</span>
+                    </v-tooltip>
 
-                      <v-icon color="green darken-2">check</v-icon>
-                    </v-list-tile>
-                  </template>
-                </v-list>
-              </v-flex>
-
-              <v-flex xs12 sm12 md6>
-                  <v-date-picker
-                    readonly
-                    color="cyan"
-                    v-model="noDate"
-                    :events="checkThatDate"
-                    :event-color="'green lighten-1'"
-                    @input="onCalendarSelected()"
-                    full-width
-                    class="margin-top-20">
-                  </v-date-picker>
-
-                  <v-list two-line>
-                  <template v-for="(item, index) in itemsForCalendar">
-                    <v-subheader class="subheading"
-                      v-if="item.header"
-                      :key="item.header">
-                      {{ item.header }}
-                    </v-subheader>
-
-                    <v-divider
-                      v-else-if="item.divider"
-                      :inset="item.inset"
-                      :key="index"></v-divider>
-
-                    <v-list-tile
-                      v-else
-                      :key="item.title"
-                      avatar>
-                      <v-list-tile-avatar>
-                        <img :src="item.avatar">
-                      </v-list-tile-avatar>
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                      </v-list-tile-content>
-
-                      <v-icon :color="item.color">{{item.status}}</v-icon>
-                    </v-list-tile>
-                  </template>
-                </v-list>
-              </v-flex>
-
-              <v-flex sx12 sm12 md12>
-                  <v-text-field
-                        label="Comment"
-                        placeholder="Write your comment here">
-                </v-text-field>
-                
-                <div class="text-xs-right text-sm-right text-md-right request-buttons">
-                    <v-btn color="red" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Reject</v-btn>
-                    <v-btn color="green" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Approve</v-btn>
-                </div>
-              </v-flex>
-            </v-layout>
-        </v-container>
+                    <v-icon color="green darken-2">check</v-icon>
+                  </v-list-tile>
+                </template>
+              </v-list>
+            </v-tab-item>
+          </v-tabs-items>
+        
         </v-card-text>
       </v-card>
 </template>
@@ -189,6 +202,7 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class LeaveApprovalDetail extends Vue {
   public newFormdialog: boolean = false;
   public noDate: any;
+  public tabs: string = "tab-1";
 
   public message: any = {
           avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -200,7 +214,6 @@ export default class LeaveApprovalDetail extends Vue {
   public markedDates: number[] =[15, 16, 17, 18, 19, 20];
 
 public items: any[] = [
-    { header: 'History' },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     title: 'Anan Khafli <span class="grey--text text--lighten-1">(Team Leader)</span>',
