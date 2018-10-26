@@ -152,7 +152,9 @@
           <v-list-tile>
             <v-spacer></v-spacer>
             <v-list-tile-action>
-              <span class="clickable">Show all</span>
+              <v-btn flat>
+                <span>Show all</span>
+              </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
@@ -188,7 +190,9 @@
           <v-list-tile>
             <v-spacer></v-spacer>
             <v-list-tile-action>
-              <span class="clickable">Show all</span>
+              <v-btn flat>
+                <span>Show all</span>
+              </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>

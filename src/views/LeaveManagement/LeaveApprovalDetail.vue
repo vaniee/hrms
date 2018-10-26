@@ -140,8 +140,8 @@
                   </v-text-field>
                   
                   <div class="text-xs-right text-sm-right text-md-right request-buttons">
-                      <v-btn color="red" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Reject</v-btn>
                       <v-btn color="green" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Approve</v-btn>
+                      <v-btn color="red" flat @click.native="newFormdialog = false" @click="saveOrCloseClicked()">Reject</v-btn>
                   </div>
                 </v-flex>
               </v-layout>
@@ -258,9 +258,9 @@ public itemsForCalendar: any[] = [
 ];
 
 public actions: any[] = [
-        { title: 'Edit' },
-        { title: 'Delete' }
-      ];
+  { title: 'Edit' },
+  { title: 'Delete' }
+];
 
   constructor() {
     super();
