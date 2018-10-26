@@ -3,10 +3,10 @@
     <v-toolbar color="white" tabs>
       <v-toolbar-title>Claim Request Management</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="add = !add">
+      <v-btn icon @click="dialog = true">
         <v-icon>note_add</v-icon>
       </v-btn>
-      <v-btn icon @click.stop="setting = !setting">
+      <v-btn icon @click="settingDialog = true">
         <v-icon>more_vert</v-icon>
       </v-btn>
 
@@ -16,17 +16,14 @@
               slider-color="yellow">
         <v-tab href="#tab-1">
           Overview
-          <v-icon class="top-negative-3">dashboard</v-icon>
         </v-tab>
 
         <v-tab href="#tab-2">
           My Request
-          <v-icon class="top-negative-3">account_circle</v-icon>
         </v-tab>
 
         <v-tab href="#tab-3">
           Approval
-          <v-icon class="top-negative-3">assignment_turned_in</v-icon>
         </v-tab>
 
       </v-tabs>
@@ -36,43 +33,31 @@
       <router-view></router-view>
     </v-tabs-items>
 
-    <v-dialog v-model="dialog" persistent max-width="800px">
+    <v-dialog v-model="dialog" persistent max-width="900px">
         <ClaimNewForm @on-button-clicked="onButtonClicked"/>
     </v-dialog>
 
-    <v-navigation-drawer
-      v-model="add"
-      absolute
-      temporary
-      width = "500"
-    >
-      <ClaimNewForm @on-button-clicked="onButtonClicked"/>
-    </v-navigation-drawer>
-    <v-navigation-drawer
-      v-model="setting"
-      absolute
-      temporary
-      width = "500"
-    >
-      <ClaimSettingForm @on-button-clicked="onButtonClicked"/>
-    </v-navigation-drawer>
+    <v-dialog v-model="settingDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <ClaimSetting @on-button-clicked="onSettingButtonClicked"/>>
+    </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ClaimNewForm from "@/views/ClaimManagement/ClaimNewForm.vue";
-import ClaimSettingForm from "@/views/ClaimManagement/ClaimSettingForm.vue";
+import ClaimSetting from "@/views/ClaimManagement/ClaimSetting.vue";
+
 @Component({
   components: {
-    ClaimNewForm,ClaimSettingForm
+    ClaimNewForm, ClaimSetting
   },
 })
 export default class ClaimHome extends Vue {
   public dialog: boolean = false;
+  public settingDialog : boolean = false;
   public tabs: any = null;
-  public add: any =  null;
-  public setting: any =  null;
+
   constructor() {
     super();
   }  
@@ -80,11 +65,22 @@ export default class ClaimHome extends Vue {
   public onButtonClicked(dialog: boolean): any {
     this.dialog = dialog;
   }
+
+  public onSettingButtonClicked(dialog: boolean) :any {
+    this.settingDialog = dialog;
+  }
 }
 </script>
 
 <style>
+/*
 .top-negative-3 {
   margin-top: -3px
+}
+*/
+
+.v-menu__content{
+  top: 0 !important;
+  left: -370px !important;
 }
 </style>

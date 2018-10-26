@@ -4,6 +4,9 @@ import Home from './views/Home.vue'
 import LeaveLayout from "./views/LeaveManagement/LeaveLayout.vue";
 import LeaveHome from "./views/LeaveManagement/LeaveHome.vue";
 import LeaveUserList from "./views/LeaveManagement/LeaveUserList.vue";
+import ClaimLayout from "./views/ClaimManagement/ClaimLayout.vue";
+import ClaimHome from "./views/ClaimManagement/ClaimHome.vue";
+import ClaimUserList from "./views/ClaimManagement/ClaimUserList.vue";
 
 Vue.use(Router)
 
@@ -34,6 +37,24 @@ export default new Router({
         }
       ]
     },
+    {
+      path: "/claimhome",
+      name: "ClaimHome",
+      component: ClaimLayout,
+      redirect: "/claimhome/home",
+      children: [
+        {
+          path: "home",
+          name: "Home",
+          component: ClaimHome,
+        },
+        {
+          path: "timeline",
+          name: "Timeline Page",
+          components: { default: ClaimUserList }
+        }
+      ]
+},
     {
       path: '/about',
       name: 'About',

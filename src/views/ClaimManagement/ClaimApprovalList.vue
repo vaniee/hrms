@@ -36,9 +36,9 @@
       <template slot="headers" slot-scope="props">
       <tr>
         <th v-for="header in props.headers"
-          :key="header.text"
           :style="{width: header.width}"
-          :class="[(header.value == 'claimType'|| header.value == 'endDate' || header.value == 'submitDate') ? 'hidden-sm-and-down' : '',
+          :key="header.text"
+          :class="[(header.value == 'claimType'|| header.value == 'endDate' || header.value == 'submitDate' || header.value == 'status') ? 'hidden-sm-and-down' : '',
           'column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '', 'align-left']"
           @click="changeSort(header.value)">
           {{ header.text }}
@@ -49,19 +49,54 @@
 
      
       <template slot="items" slot-scope="props">
-        <tr class="clickable" @click="detailDialog = true">
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-left hidden-sm-and-down">{{ props.item.claimType }}</td>
-          <td class="text-xs-left">{{ props.item.startDate }}</td>
-          <td class="text-xs-left hidden-sm-and-down">{{ props.item.endDate }}</td>
-          <td class="text-xs-left hidden-sm-and-down">{{ props.item.total }}</td>
-          <td class="text-xs-left">{{ props.item.status }}</td>
+        <tr class="clickable">
+          <td @click="openDetailDialog()"> 
+            <v-avatar slot="activator" size="36px">
+              <img :src="props.item.avatar">
+          </v-avatar>
+            {{ props.item.name }}
+          </td>
+          <td class="text-xs-left hidden-sm-and-down" @click="openDetailDialog()">{{ props.item.claimType }}</td>
+          <td class="text-xs-left" @click="openDetailDialog()">{{ props.item.startDate }}</td>
+          <td class="text-xs-left hidden-sm-and-down" @click="openDetailDialog()">{{ props.item.submitDate }}</td>
+          <td class="text-xs-left hidden-sm-and-down" @click="openDetailDialog()">{{ props.item.total }}</td>
+          <td class="text-xs-left hidden-sm-and-down" @click="openDetailDialog()">{{ props.item.status }}</td>
+          <td class="text-xs-left"> 
+            <v-icon medium
+              @click="props.expanded = !props.expanded">reorder</v-icon>
+          </td>
         </tr>
       </template>
+      <template slot="expand" slot-scope="props">
+      <v-card flat>
+        <v-card-text>
+          <v-avatar
+              slot="activator"
+              size="36px">
+              <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                alt="Avatar">
+          </v-avatar>
+          <span> Johnathan Frozen Yogurt: "Wish I could come, but I'm out of town this weekend."</span>
+        </v-card-text>
+
+        <v-layout wrap class="brief-info">
+          <v-flex xs12 sm6 md9>
+            <v-text-field
+              label="Comment">
+            </v-text-field>
+          </v-flex>
+          <v-flex xs12 sm6 md3 text-xs-right text-sm-right text-md-right>
+            <v-btn color="btn-success-important" @click="props.expanded = false">Approve</v-btn>
+            <v-btn color="btn-error-important" @click="props.expanded = false">Reject</v-btn>
+          </v-flex>
+        </v-layout>
+
+      </v-card>
+    </template>
     </v-data-table>
 
     <v-dialog v-model="detailDialog" persistent max-width="900px">
-        <ClaimUserDetail @on-button-clicked="onButtonClicked"/>
+        <ClaimApprovalDetail @on-button-clicked="onButtonClicked"/>
     </v-dialog>
 
     <v-dialog v-model="searchBoxDialog" persistent max-width="500px">
@@ -73,15 +108,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ClaimUserDetail from "@/views/ClaimManagement/ClaimUserDetail.vue";
 import ClaimSearchBox from "@/views/ClaimManagement/ClaimSearchBox.vue";
+import ClaimApprovalDetail from "@/views/ClaimManagement/ClaimApprovalDetail.vue";
 
 @Component({
   components: {
-    ClaimUserDetail, ClaimSearchBox
+    ClaimSearchBox, ClaimApprovalDetail
   },
 })
-export default class ClaimUserList extends Vue {
+export default class ClaimApprovalList extends Vue {
   public detailDialog: boolean = false;
   public searchBoxDialog: boolean = false;
   public pagination: any = {
@@ -89,107 +124,118 @@ export default class ClaimUserList extends Vue {
   };
   public headers: any[] = [
     {
-      text: 'Apply To',
+      text: 'Request From',
       align: 'left',
       sortable: false,
       value: 'name'
     },
     { text: 'Claim Type', value: 'claimType' },
     { text: 'Application Date', value: 'startDate', width: '50px' },
-    { text: 'Date of Expense', value: 'endDate' },
+    { text: 'Date of Expense', value: 'submitDate'},
     { text: 'Total', value: 'total' },
     { text: 'Status', value: 'status' },
+    { text: '', value: '', width: '50px'}
   ];
   public desserts: any[] = [
     {
       value: false,
       name: 'Johnathan Frozen Yogurt',
       startDate: "2018-09-15",
-      endDate: "2018-09-18",
-      claimType: "Sick Leave",
-      total: "2018-09-19",
-      status: 'Approved'
+      total: 109000,
+      claimType: "Sick Claim",
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
     },
     {
       value: false,
       name: 'Ice cream sandwich',
       startDate: "2018-09-12",
-      endDate: "2018-09-18",
-      claimType: "Vacation Leave",
-      total: "2018-09-19",
-      status: 'Pending'
+      total: 900000,
+      claimType: "Vacation Claim",
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
     },
     {
       value: false,
       name: 'Margaret E. Gillespie',
       startDate: "2018-08-01",
-      endDate: "2018-09-18",
-      claimType: "Sick Leave",
-      total: "2018-09-19",
-      status: 'Under Review'
+      total: 400000,
+      claimType: "Sick Claim",
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
     },
     {
       value: false,
       name: 'Darrel K. Nieves',
       startDate: "2018-02-25",
-      endDate: "2018-09-18",
-      claimType: "Vacation Leave",
-      total: "2018-09-19",
-      status: 'Approved'
+      total: 100000,
+      claimType: "Vacation Claim",
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
     },
     {
       value: false,
       name: 'Adrian Merrill',
       startDate: "2018-09-12",
-      endDate: "2018-09-18",
-      claimType: "Sick Leave",
-      total: "2018-09-19",
-      status: 'Rejected'
+      total: 69000,
+      claimType: "Sick Claim",
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
     },
     {
       value: false,
       name: 'Julian Rutledge',
       startDate: "2018-10-12",
-      endDate: "2018-09-18",
+      total:5000000,
       claimType: "Business Trip",
-      total: "2018-09-19",
-      status: 'Pending'
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
     },
     {
       value: false,
       name: 'Moses Mcconnell',
       startDate: "2018-10-12",
-      endDate: "2018-09-18",
+      total: 30000000,
       claimType: "Vacation Leave",
-      total: "2018-09-19",
-      status: 'Pending'
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
     },
     {
       value: false,
       name: 'Honeycomb',
       startDate: "2018-10-12",
-      endDate: "2018-09-18",
+      total: "400000000",
       claimType: "Sick Leave",
-      total: "2018-09-19",
-      status: 'Rejected'
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
     },
     {
       value: false,
       name: 'Moses C. Molina',
       startDate: "2018-10-05",
-      endDate: "2018-09-18",
+      total: 60000000,
       claimType: "Sick Leave",
-      total: "2018-09-19",
-      status: 'Pending'
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
     },
     {
       value: false,
       name: 'Zorita Schneider',
       startDate: "2018-10-09",
-      endDate: "2018-09-18",
+      total: 36000000,
       claimType: "Business Trip",
-      total: "2018-09-19",
-      status: 'Approved'
+      submitDate: "2018-09-19",
+      status: 'Pending',
+      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
     }
   ];
   public search: string = '';
@@ -221,6 +267,10 @@ export default class ClaimUserList extends Vue {
     this.searchBoxDialog = dialog;
   }
 
+  public openDetailDialog(): any {
+    this.detailDialog = true;
+  }
+
   public detail (item: any) {
     //this.$router.replace({path: "", name: ""});
   }
@@ -240,5 +290,22 @@ export default class ClaimUserList extends Vue {
 
 .clickable{
   cursor: pointer;
+}
+
+.btn-success-important {
+  color: white !important;
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+}
+
+.btn-error-important {
+  color: white !important;
+  background-color: #ff5252 !important;
+  border-color: #ff5252 !important; 
+}
+
+.brief-info{
+  padding-left: 15px;
+  padding-right: 15px;
 }
 </style>

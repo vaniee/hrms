@@ -1,49 +1,130 @@
-
 <template>
    <v-card>
         <v-card-title>
-          <span class="headline">User Profile</span>
+          <span class="headline">Claim Request</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
-              <v-flex xs12 sm6 md4>
-                <v-text-field label="Legal first name*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field
-                  label="Legal last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Email*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Password*" type="password" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6>
+               <v-flex xs12 sm6 md6>
                 <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
+                  :items="['Johnathan Frozen Yogurt', 'Ice cream sandwich', 'Margaret E. Gillespie']"
+                  label="Apply To*"
                   required
                 ></v-select>
               </v-flex>
-              <v-flex xs12 sm6>
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
+              <v-spacer></v-spacer>
+              <v-flex xs12 sm6 md4>
+                <v-select
+                  :items="['Insurance', 'Business Trip', 'Others']"
+                  label="Claim Type*"
+                  required
+                ></v-select>
+                <v-spacer></v-spacer>
+                </v-flex>
+
+              <v-flex xs12 sm6 md4>
+              <v-dialog
+                  ref="dialog"
+                  v-model="modal"
+                  :return-value.sync="date"
+                  persistent
+                  lazy
+                  full-width
+                  width="290px">
+                  <v-text-field
+                    slot="activator"
+                    v-model="date"
+                    label="Application Date"
+                    prepend-icon="event"
+                    readonly>
+                  </v-text-field>
+                  <v-date-picker v-model="date" scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                  </v-date-picker>
+                </v-dialog>
               </v-flex>
+              <v-flex xs12 sm6 md4>
+              <v-dialog
+                  ref="dialog"
+                  v-model="modal"
+                  :return-value.sync="date"
+                  persistent
+                  lazy
+                  full-width
+                  width="290px">
+                  <v-text-field
+                    slot="activator"
+                    v-model="date"
+                    label="Expense From"
+                    prepend-icon="event"
+                    readonly>
+                  </v-text-field>
+                  <v-date-picker v-model="date" scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                  </v-date-picker>
+                </v-dialog>
+              </v-flex>
+            <v-flex xs12 sm6 md4>
+              <v-dialog
+                  ref="dialog"
+                  v-model="modal"
+                  :return-value.sync="date"
+                  persistent
+                  lazy
+                  full-width
+                  width="290px">
+                  <v-text-field
+                    slot="activator"
+                    v-model="date"
+                    label="Expense To"
+                    prepend-icon="event"
+                    readonly>
+                  </v-text-field>
+                  <v-date-picker v-model="date" scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                  </v-date-picker>
+                </v-dialog>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                 <v-select
+                  :items="['Food', 'Taxi']"
+                  label="Expense Item"
+                  required
+                ></v-select>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Amount" style="text-align:right" required></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md2>
+                <v-select
+                  :items="['VND', 'USD', 'HKD', 'EURO']"
+                  label="Currency"
+                  required
+                ></v-select>
+              </v-flex>
+                
+              <v-flex xs12>
+                <v-text-field
+                    label="Reason"
+                    value=""
+                    hint="Type the reason for request"></v-text-field>
+              </v-flex>
+            <v-flex xs12>
+                <div>
+                  <h3>Upload Document</h3>
+                    <input type="file" >
+                </div>
+            </v-flex>
+            
             </v-layout>
           </v-container>
-          <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
