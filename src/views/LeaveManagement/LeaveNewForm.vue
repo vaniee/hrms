@@ -16,7 +16,7 @@
                   <v-select
                   :items="['Sick Leave', 'Vacation Leave', 'Business Trip']"
                   label="Leave Type"
-                  prepend-icon="insert_drive_file">
+                  prepend-icon="receipt">
                   </v-select>
 
                   <v-dialog

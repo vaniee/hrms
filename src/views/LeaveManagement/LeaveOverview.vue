@@ -29,10 +29,12 @@
                   <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
                 </v-list-tile-sub-title>
               </v-list-tile-content>
+              
               <v-tooltip v-model="item.showComment" left max-width="180">
                   <span slot="activator">&nbsp;</span>
                   <span>{{item.comment}}</span>
               </v-tooltip>
+              <v-icon :color="item.color">{{item.status}}</v-icon>
             </v-list-tile>
           </template>
         </v-list>
@@ -84,6 +86,8 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     title: 'Anan Khafli <span class="grey--text text--lighten-1">(Sick Leave)</span>',
     subtitle: "2018-10-19 14:29:01",
+    status: 'check',
+    color: 'green darken-2',
     showComment: false,
     comment: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
     },
@@ -92,6 +96,8 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
     title: 'Adam Khoo <span class="grey--text text--lighten-1">(Vacation Leave)</span>',
     subtitle: "2018-10-11 14:29:08",
+    status: 'check',
+    color: 'green darken-2',
     showComment: false,
     comment: "Wish I could come, but I'm out of town this weekend.",
     },
@@ -100,6 +106,8 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
     title: 'Oui Manan <span class="grey--text text--lighten-1">(Sick Leave)</span>',
     subtitle: "2018-10-02 14:29:36",
+    status: 'check',
+    color: 'green darken-2',
     showComment: false,
     comment: "Do you have Paris recommendations? Have you ever been?",
     },
@@ -108,6 +116,8 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     title: 'Anan Khafli <span class="grey--text text--lighten-1">(Business Leave)</span>',
     subtitle: "2018-09-03 08:29:01",
+    status: 'check',
+    color: 'green darken-2',
     showComment: false,
     comment: "I'll be in your neighborhood doing errands this weekend.",
     },
@@ -116,6 +126,8 @@ public items: any[] = [
     avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
     title: 'Ali Connors <span class="grey--text text--lighten-1">(Business Leave)</span>',
     subtitle: "2018-09-01 10:02:20",
+    status: 'check',
+    color: 'green darken-2',
     showComment: false,
     comment: "I'll be in your neighborhood doing errands this weekend.",
     }

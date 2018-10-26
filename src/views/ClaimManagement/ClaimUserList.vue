@@ -201,7 +201,7 @@ export default class ClaimUserList extends Vue {
 
   public created () {
       
-  };
+  }
 
   public changeSort (column: any) {
         if (this.pagination.sortBy === column) {

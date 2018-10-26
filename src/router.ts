@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import LeaveLayout from "./views/LeaveManagement/LeaveLayout.vue";
 import LeaveHome from "./views/LeaveManagement/LeaveHome.vue";
 import LeaveUserList from "./views/LeaveManagement/LeaveUserList.vue";
-import LeaveMyRequest from "./views/LeaveManagement/LeaveMyRequest.vue";
+import LeavePendingRequest from "./views/LeaveManagement/LeavePendingRequest.vue";
 import ClaimLayout from "./views/ClaimManagement/ClaimLayout.vue";
 import ClaimHome from "./views/ClaimManagement/ClaimHome.vue";
 import ClaimUserList from "./views/ClaimManagement/ClaimUserList.vue";
@@ -39,9 +39,9 @@ export default new Router({
       ]
     },
     {
-      path: '/leavemyrequest',
-      name: 'LeaveMyRequest',
-      component: LeaveMyRequest
+      path: '/leavependingrequest',
+      name: 'LeavePendingRequest',
+      component: LeavePendingRequest
     },
     {
       path: "/claimhome",

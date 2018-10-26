@@ -99,7 +99,6 @@
                       v-model="noDate"
                       :events="checkThatDate"
                       :event-color="'green lighten-1'"
-                      @input="onCalendarSelected()"
                       full-width
                       class="margin-top-20">
                     </v-date-picker>
@@ -211,7 +210,7 @@ export default class LeaveApprovalDetail extends Vue {
           name2: 'Oui Manan',
           msg: ' are absent on this day'
         }
-  public markedDates: number[] =[15, 16, 17, 18, 19, 20];
+public markedDates: number[] =[15, 16, 17, 18, 19, 20];
 
 public items: any[] = [
     {

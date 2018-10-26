@@ -226,7 +226,7 @@ public people: any[] = [
 public leaveTypes: any[] = [
   { title: 'Annual Leave (AL)', code: 'AL', status: 'Active' },
   { title: 'Sick Leave (SL)', code: 'SL', status: 'Inactive' },
-  { title: 'Business Travel (BT)', code: 'BT', status: 'Active' },
+  { title: 'Business Trip (BT)', code: 'BT', status: 'Active' },
   { title: 'Vacation Leave (VL)', code: 'VL', status: 'Active' }
 ];
 
