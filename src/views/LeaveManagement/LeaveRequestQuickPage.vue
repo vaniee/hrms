@@ -31,6 +31,7 @@
         </div>
 
         <v-list>
+          <v-subheader>Approved</v-subheader>
           <v-list-group
             v-for="item in items"
             v-model="item.active"
@@ -44,19 +45,58 @@
                 <v-list-tile-title v-html="item.title"></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
               </v-list-tile-content>
+              <v-icon :color="item.color">{{item.status}}</v-icon>
             </v-list-tile>
 
             <v-list-tile
               v-for="subItem in item.items"
               :key="subItem.title">
-              <v-list-tile-content>
-                <v-list-tile-sub-title v-html="subItem.period"></v-list-tile-sub-title>
-                <v-list-tile-sub-title v-html="subItem.reason"></v-list-tile-sub-title>
+              <v-list-tile-content v-if="subItem.line1 != 'field' && subItem.line2 != 'actions'">
+                <v-list-tile-sub-title v-html="subItem.line1"></v-list-tile-sub-title>
+                <v-list-tile-sub-title v-html="subItem.line2"></v-list-tile-sub-title>
+              </v-list-tile-content>
+              <v-list-tile-content v-if="subItem.line1 == 'field' && subItem.line2 == 'actions'">
+                <v-text-field
+                          label="Comment"
+                          placeholder="Write your comment here">
+                  </v-text-field>
               </v-list-tile-content>
 
-              <v-list-tile-action>
-                <v-icon>{{ subItem.action }}</v-icon>
-              </v-list-tile-action>
+              <span v-if="subItem.line1 == 'field' && subItem.line2 == 'actions'">
+                <v-icon color="green darken-2">check</v-icon>
+                &nbsp;
+                <v-icon color="red">close</v-icon>
+              </span>
+            </v-list-tile>
+          </v-list-group>
+        </v-list>
+
+        <v-list>
+          <v-subheader>Pending</v-subheader>
+          <v-list-group
+            v-for="item in items"
+            v-model="item.active"
+            :key="item.title"
+            no-action>
+            <v-list-tile slot="activator" avatar @click="updateCalendarTracker(item.no)">
+              <v-list-tile-avatar>
+                <img :src="item.avatar">
+              </v-list-tile-avatar>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+              </v-list-tile-content>
+              <v-icon :color="item.color">{{item.status}}</v-icon>
+            </v-list-tile>
+
+            <v-list-tile
+              v-for="subItem in item.items"
+              :key="subItem.title">
+              <v-list-tile-content v-if="subItem.line1 != 'field' && subItem.line2 != 'actions'">
+                <v-list-tile-sub-title v-html="subItem.line1"></v-list-tile-sub-title>
+                <v-list-tile-sub-title v-html="subItem.line2"></v-list-tile-sub-title>
+              </v-list-tile-content>
+              
             </v-list-tile>
           </v-list-group>
         </v-list>
@@ -74,17 +114,23 @@ import { Component, Vue } from 'vue-property-decorator';
 
   },
 })
-export default class LeavePendingRequest extends Vue {
+export default class LeaveRequestQuickPage extends Vue {
 public items: any[] = [
     {
     no: '1',
     title: 'Jason Oner <span class="grey--text text--lighten-1">(Sick Leave)</span>',
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
     subtitle: "2018-10-19 14:29:01",
+    status: 'update',
+    color: 'lime darken-1',
     items: [
         { 
-          period: "<b>Period (5 days):</b> 2018-10-15 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+          line1: "<b>Period:</b> 2018-10-15 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
+          line2: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+        },
+        { 
+          line1: "field",
+          line2: "actions"
         }
     ]
     },
@@ -93,11 +139,17 @@ public items: any[] = [
     title: 'Ranee Carlson <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
     subtitle: "2018-10-11 14:29:08",
+    status: 'update',
+    color: 'lime darken-1',
     active: true,
     items: [
         { 
-          period: "<b>Period (1 days):</b> 2018-10-17",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+          line1: "<b>Period:</b> 2018-10-17",
+          line2: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+        },
+        { 
+          line1: "field",
+          line2: "actions"
         }
     ]
     },
@@ -106,10 +158,16 @@ public items: any[] = [
     title: 'Cindy Baker <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
     subtitle: "2018-10-02 14:29:36",
+    status: 'update',
+    color: 'lime darken-1',
     items: [
         { 
-          period: "<b>Period (2 days):</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+          line1: "<b>Period:</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
+          line2: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+        },
+        { 
+          line1: "field",
+          line2: "actions"
         }
     ]
     },
@@ -118,10 +176,16 @@ public items: any[] = [
     title: 'Ali Connors <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
     subtitle: "2018-09-03 08:29:01",
+    status: 'update',
+    color: 'lime darken-1',
     items: [
         { 
-          period: "<b>Period (3 days):</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-21",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+          line1: "<b>Period:</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-21",
+          line2: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+        },
+        { 
+          line1: "field",
+          line2: "actions"
         }
     ]
     }

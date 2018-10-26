@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/leavehome">Leave Management</router-link> | 
-      <router-link to="/leavependingrequest">Leave Pending Request</router-link> |
+      <router-link to="/leaverequestquickpage">Leave Pending Request</router-link> |
       <router-link to="/claimhome">Claim Management</router-link> |
       <router-link to="/about">About</router-link>
     </div>

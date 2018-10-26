@@ -134,7 +134,7 @@
                   </v-list>
                 </v-flex>
                 <v-flex sx12 sm12 md12>
-                    <v-text-field
+                  <v-text-field
                           label="Comment"
                           placeholder="Write your comment here">
                   </v-text-field>
