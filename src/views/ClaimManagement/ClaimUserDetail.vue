@@ -47,7 +47,7 @@
 
                     <v-list-tile >
                       <v-list-tile-action>
-                        <v-icon>event</v-icon>
+                        <v-icon>attach_money</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
                         <v-list-tile-sub-title>Total(VND)</v-list-tile-sub-title>
@@ -59,11 +59,11 @@
 
                     <v-list-tile >
                       <v-list-tile-action>
-                        <v-icon>chat</v-icon>
+                        <v-icon>date_range</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
-                        <v-list-tile-sub-title>Reason</v-list-tile-sub-title>
-                        <v-list-tile-title>I'll be in your neighborhood doing errands this weekend. Do you want to hang out. Really! Do you want to hang out?</v-list-tile-title>
+                        <v-list-tile-sub-title>Expense Date</v-list-tile-sub-title>
+                        <v-list-tile-title>2018-10-30</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
                   </v-list>
@@ -106,43 +106,56 @@
                 </v-list>
               </v-flex>
 
-              <v-flex xs12 sm12 md6>
-                  <v-date-picker
-                    readonly
-                    color="cyan"
-                    v-model="noDate"
-                    :events="checkThatDate"
-                    :event-color="'green lighten-1'"
-                    @input="onCalendarSelected()"
-                    full-width
-                    class="margin-top-20">
-                  </v-date-picker>
+               <v-flex xs12 sm12 md6>   
+      <v-card>
+        <v-list two-line subheader>
+         <v-toolbar color="light-blue" dark>
 
-                  <div v-if="claimInfoOnDate">
-                    <br/>
-                    <v-avatar
-                      slot="activator"
-                      size="36px">
-                      <img
-                        v-if="message.avatar"
-                        :src="message.avatar"
-                        alt="Avatar">
-                    </v-avatar>
-                    &nbsp;
-                    <strong v-html="message.name"></strong>
-                    &nbsp;
-                    <v-avatar
-                      slot="activator"
-                      size="36px">
-                      <img
-                        v-if="message.avatar2"
-                        :src="message.avatar2"
-                        alt="Avatar">
-                    </v-avatar>
-                    &nbsp;
-                    <strong v-html="message.name2"></strong>
-                    <span>{{message.msg}}</span>
-                  </div>
+          <v-toolbar-title>Attachment</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+          
+          <v-btn icon>
+            <v-icon>info</v-icon>
+          </v-btn>
+        </v-toolbar>
+          <v-list-tile
+            v-for="item in items1"
+            :key="item.title"
+            avatar
+          >
+            <v-list-tile-avatar>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+
+          <v-subheader inset>Files</v-subheader>
+
+          <v-list-tile
+            v-for="item in items2"
+            :key="item.title"
+            avatar
+            
+          >
+            <v-list-tile-avatar>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          
+        </v-list>
+        <v-spacer></v-spacer>
+      </v-card>
               </v-flex>
             </v-layout>
         </v-container>
@@ -196,6 +209,15 @@ public items: any[] = [
     comment: "Do you have Paris recommendations? Have you ever been?",
     }
 ];
+public items1: any[] = [
+          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Photos', subtitle: 'Jan 9, 2014' },
+          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Recipes', subtitle: 'Jan 17, 2014' },
+          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Work', subtitle: 'Jan 28, 2014' }
+        ];
+public items2: any[] = [
+          { icon: 'assignment', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
+          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' }
+        ];
 
   constructor() {
     super();

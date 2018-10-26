@@ -97,7 +97,7 @@ export default class ClaimUserList extends Vue {
     { text: 'Claim Type', value: 'claimType' },
     { text: 'Application Date', value: 'startDate', width: '50px' },
     { text: 'Date of Expense', value: 'endDate' },
-    { text: 'Total', value: 'total' },
+    { text: 'Total Claim', value: 'total' },
     { text: 'Status', value: 'status' },
   ];
   public desserts: any[] = [

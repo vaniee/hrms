@@ -76,7 +76,7 @@
               <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
                 alt="Avatar">
           </v-avatar>
-          <span> Johnathan Frozen Yogurt: "Wish I could come, but I'm out of town this weekend."</span>
+          <span> Johnathan Frozen Yogurt: "Hotel Costs" - 700000 VND</span>
         </v-card-text>
 
         <v-layout wrap class="brief-info">
@@ -132,7 +132,7 @@ export default class ClaimApprovalList extends Vue {
     { text: 'Claim Type', value: 'claimType' },
     { text: 'Application Date', value: 'startDate', width: '50px' },
     { text: 'Date of Expense', value: 'submitDate'},
-    { text: 'Total', value: 'total' },
+    { text: 'Total Claim', value: 'total' },
     { text: 'Status', value: 'status' },
     { text: '', value: '', width: '50px'}
   ];

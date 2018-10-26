@@ -74,26 +74,26 @@ public items: any[] = [
     { header: 'Team members' },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Sick Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-11-20</b> to <b>2018-11-22</b></span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Business Trip)</span>',
+    subtitle: "<span class='text--primary'>From <b>2018-11-20</b> to <b>2018-11-22</b></span> &mdash; 800000 (VND)"
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    title: 'Adam Khoo <span class="grey--text text--lighten-1">(Vacation Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-09-02</b> to <b>2018-09-13</b></span> &mdash; Wish I could come, but I'm out of town this weekend."
+    title: 'Adam Khoo <span class="grey--text text--lighten-1">(Other)</span>',
+    subtitle: "<span class='text--primary'>From <b>2018-09-02</b> to <b>2018-09-13</b></span> &mdash; 600 (USD)"
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
     title: 'Oui Manan <span class="grey--text text--lighten-1">(Business Trip)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-08-20</b> to <b>2018-08-30</b></span> &mdash; Do you have Paris recommendations? Have you ever been?"
+    subtitle: "<span class='text--primary'>From <b>2018-08-20</b> to <b>2018-08-30</b></span> &mdash; 5000000 (VND)"
     },
     { divider: true, inset: true },
     {
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Business Leave)</span>',
-    subtitle: "<span class='text--primary'>From <b>2018-08-15</b> to <b>2018-08-20</b></span> &mdash; I'm going to hang out with our best customer?"
+    title: 'Anan Khafli <span class="grey--text text--lighten-1">(Insurance)</span>',
+    subtitle: "<span class='text--primary'>From <b>2018-08-15</b> to <b>2018-08-20</b></span> &mdash; 300000000 (VND)"
     }
 ];
 public noDate: any;

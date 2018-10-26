@@ -14,8 +14,8 @@
                   </v-select>
 
                   <v-select
-                  :items="['Sick Leave', 'Vacation Leave', 'Business Trip']"
-                  label="Leave Type"
+                  :items="['Insurance', 'Business Trip', 'Others']"
+                  label="Claim Type"
                   prepend-icon="insert_drive_file">
                   </v-select>
 
@@ -30,7 +30,7 @@
                   <v-text-field
                     slot="activator"
                     v-model="date"
-                    label="Start date"
+                    label="Application Date"
                     prepend-icon="event"
                     readonly>
                   </v-text-field>
@@ -52,7 +52,7 @@
                   <v-text-field
                     slot="activator"
                     v-model="date2"
-                    label="End date"
+                    label="Expense Date"
                     prepend-icon="event"
                     readonly>
                   </v-text-field>
