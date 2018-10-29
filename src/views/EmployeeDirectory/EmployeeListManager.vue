@@ -147,16 +147,16 @@
                                     <v-layout row wrap>
                                         <v-flex xs12 sm9 md9>
                                             <v-list-tile>
-                                                <v-text-field xs12 sm6 md4 box value="First name" label="First name"></v-text-field>
-                                                <v-text-field xs12 sm6 md4 box value="Middle name" label="Middle name"></v-text-field>
-                                                <v-text-field xs12 sm6 md4 box value="Last name" label="Last name"></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="Jessica " label="First name"></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="K." label="Middle name"></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="Karen" label="Last name"></v-text-field>
                                             </v-list-tile>
                                             <v-list-tile>
                                                 <v-expansion-panel>
                                                     <v-expansion-panel-content expand-icon="remove">
                                                         <div slot="header">Add email</div>
                                                         <v-card>
-                                                            <v-text-field xs12 sm12 md12 label="Email"></v-text-field>
+                                                            <v-text-field label="Email"></v-text-field>
                                                         </v-card>
                                                     </v-expansion-panel-content>
                                                 </v-expansion-panel>
@@ -222,7 +222,7 @@
                                                     <v-expansion-panel-content expand-icon="remove">
                                                         <div slot="header">Add street</div>
                                                         <v-card>
-                                                            <v-text-field xs12 sm12 md12 label="Street"></v-text-field>
+                                                            <v-text-field label="Street"></v-text-field>
                                                         </v-card>
                                                     </v-expansion-panel-content>
                                                 </v-expansion-panel>
@@ -230,7 +230,7 @@
                                                     <v-expansion-panel-content expand-icon="remove">
                                                         <div slot="header">Add ward</div>
                                                         <v-card>
-                                                            <v-text-field xs12 sm12 md12 label="Ward"></v-text-field>
+                                                            <v-text-field label="Ward"></v-text-field>
                                                         </v-card>
                                                     </v-expansion-panel-content>
                                                 </v-expansion-panel>
@@ -238,11 +238,11 @@
                                             </v-list-tile>
                                             <v-list-tile>
                                                 <v-flex xs12 sm6 md4>
-                                                    <v-expansion-panel xs12 sm1 md1>
+                                                    <v-expansion-panel>
                                                         <v-expansion-panel-content expand-icon="remove">
                                                             <div slot="header">Add city</div>
                                                             <v-card>
-                                                                <v-text-field xs12 sm12 md12 label="City"></v-text-field>
+                                                                <v-text-field label="City"></v-text-field>
                                                             </v-card>
                                                         </v-expansion-panel-content>
                                                     </v-expansion-panel>
@@ -519,6 +519,88 @@ export default class EmployeeListPublic extends Vue {
             &:hover {
                 background: transparent !important;
             }
+        }
+    }
+
+    .v-expansion-panel {
+        box-shadow: none;
+
+        .v-expansion-panel__container {
+            .v-expansion-panel__header {
+                margin-top: -6px;
+                padding: 0;
+                color: rgba(0, 0, 0, .54);
+                transition: all .25s;
+                opacity: 1;
+                visibility: visible;
+
+                &:hover {
+                    color: rgba(0, 0, 0, .87);
+                }
+
+                .v-expansion-panel__header__icon {
+                    z-index: 999;
+                    display: none;
+                    margin-top: -15px;
+                }
+            }
+
+            .v-expansion-panel__body {
+                opacity: 0;
+                visibility: hidden;
+                margin-top: -50px;
+                display: block !important;
+
+                .v-input .v-label {
+                    margin-top: 2px;
+                }
+            }
+
+            &--active {
+                .v-expansion-panel__header {
+                    margin-top: 10px;
+
+                    >div:first-child {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+
+                    .v-expansion-panel__header__icon {
+                        display: block
+                    }
+                }
+
+                .v-expansion-panel__body {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+    }
+
+    .v-input {
+        padding: 0;
+
+        .v-label {
+            margin-top: 10px;
+        }
+
+        &.v-text-field {
+            .v-label--active {
+                top: 0;
+            }
+
+            &>.v-input__control>.v-input__slot:before {
+                display: none;
+            }
+        }
+
+        &.v-select .v-label {
+            margin-top: 5px;
+        }
+
+        &__append-inner {
+            display: none !important;
         }
     }
 }
