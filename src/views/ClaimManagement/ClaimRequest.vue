@@ -2,11 +2,23 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card class="margin-top-5">
-        <v-container grid-list-xl>
-            <v-layout row wrap>
-              <v-flex xs12>
-                  <v-list two-line>
-                    <v-list-tile >
+        <v-list>
+          <v-list-group
+            v-for="item in items"
+            v-model="item.active"
+            :key="item.title"
+            no-action>
+            <v-list-tile slot="activator" avatar @click="updateCalendarTracker(item.no)">
+              <v-list-tile-avatar>
+                <img :src="item.avatar">
+              </v-list-tile-avatar>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile >
                       <v-list-tile-action>
                         <v-icon>person</v-icon>
                       </v-list-tile-action>
@@ -16,7 +28,6 @@
                       </v-list-tile-content>
                     </v-list-tile>
 
-                     <v-divider inset></v-divider>
                      
                     <v-list-tile >
                       <v-list-tile-action>
@@ -28,7 +39,7 @@
                       </v-list-tile-content>
                     </v-list-tile>
 
-                    <v-divider inset></v-divider>
+
 
                     <v-list-tile >
                       <v-list-tile-action>
@@ -40,7 +51,7 @@
                       </v-list-tile-content>
                     </v-list-tile>
 
-                    <v-divider inset></v-divider>
+
 
                     <v-list-tile xs6 sm4>
                       
@@ -53,7 +64,7 @@
                       </v-list-tile-content>
                     
                     </v-list-tile>
-                    <v-divider inset></v-divider>
+
 
                     <v-list-tile xs6 sm4>
                       
@@ -75,77 +86,6 @@
                         <v-list-tile-title>Food</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
-                   
-
-          <v-list-tile
-            v-for="item in items2"
-            :key="item.title"
-            avatar
-            
-          >
-            <v-list-tile-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          
-        </v-list>               
-              </v-flex>
-              
-            </v-layout>
-        </v-container>
-  
-        <div class="text-xs-right text-sm-right text-md-right">
-            <br/>
-            <template v-if="leaveInfoOnDate">
-              <span v-for="msg in message" :key="msg.name" class="user-item">
-                <v-avatar
-                slot="activator"
-                size="36px">
-                <img
-                    v-if="msg.avatar"
-                    :src="msg.avatar"
-                    alt="Avatar">
-                </v-avatar>
-                &nbsp;
-                <strong v-html="msg.name"></strong>
-                <span>{{msg.msg}}</span>
-              </span>
-            </template>
-        </div>
-
-        <v-list>
-          <v-list-group
-            v-for="item in items"
-            v-model="item.active"
-            :key="item.title"
-            no-action>
-            <v-list-tile slot="activator" avatar @click="updateCalendarTracker(item.no)">
-              <v-list-tile-avatar>
-                <img :src="item.avatar">
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile
-              v-for="subItem in item.items"
-              :key="subItem.title">
-              <v-list-tile-content>
-                <v-list-tile-sub-title v-html="subItem.period"></v-list-tile-sub-title>
-                <v-list-tile-sub-title v-html="subItem.reason"></v-list-tile-sub-title>
-              </v-list-tile-content>
-
-              <v-list-tile-action>
-                <v-icon>{{ subItem.action }}</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
           </v-list-group>
         </v-list>
       </v-card>
@@ -166,52 +106,28 @@ export default class ClaimRequest extends Vue {
 public items: any[] = [
     {
     no: '1',
-    title: 'Jason Oner <span class="grey--text text--lighten-1">(Sick Leave)</span>',
+    title: 'Jason Oner <span class="grey--text text--lighten-1">(Insurance)</span>',
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    subtitle: "2018-10-19 14:29:01",
-    items: [
-        { 
-          period: "<b>Period (5 days):</b> 2018-10-15 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        }
-    ]
+    subtitle: "2018-10-19 14:29:01"
     },
     {
     no: '2',
-    title: 'Ranee Carlson <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
+    title: 'Ranee Carlson <span class="grey--text text--lighten-1">(Business Trip)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
     subtitle: "2018-10-11 14:29:08",
-    active: true,
-    items: [
-        { 
-          period: "<b>Period (1 days):</b> 2018-10-17",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        }
-    ]
+    active: true
     },
     {
     no: '3',
-    title: 'Cindy Baker <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
+    title: 'Cindy Baker <span class="grey--text text--lighten-1">(Business Trip)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    subtitle: "2018-10-02 14:29:36",
-    items: [
-        { 
-          period: "<b>Period (2 days):</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-20",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        }
-    ]
+    subtitle: "2018-10-02 14:29:36"
     },
     {
     no: '4',
-    title: 'Ali Connors <span class="grey--text text--lighten-1">(Sick Leave)</span>', 
+    title: 'Ali Connors <span class="grey--text text--lighten-1">(Travel Costs)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    subtitle: "2018-09-03 08:29:01",
-    items: [
-        { 
-          period: "<b>Period (3 days):</b> 2018-10-19 &nbsp;<i class='material-icons' style='font-size: 10px'>arrow_forward</i>&nbsp; 2018-10-21",
-          reason: "<b>Reason:</b> I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        }
-    ]
+    subtitle: "2018-09-03 08:29:01"
     }
 ];
 public noDate: any;
@@ -282,7 +198,5 @@ public updateCalendarTracker(personName: string) {
   margin-top: 5px;
 }
 
-.user-item{
-  margin-left: 5px;
-}
+
 </style>

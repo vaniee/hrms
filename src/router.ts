@@ -8,6 +8,7 @@ import LeaveRequestQuickPage from "./views/LeaveManagement/LeaveRequestQuickPage
 import ClaimLayout from "./views/ClaimManagement/ClaimLayout.vue";
 import ClaimHome from "./views/ClaimManagement/ClaimHome.vue";
 import ClaimUserList from "./views/ClaimManagement/ClaimUserList.vue";
+import ClaimRequest from "./views/ClaimManagement/ClaimRequest.vue";
 import EmployeeDirectory from "./views/EmployeeDirectory.vue";
 import EmployeeListManager from "./views/EmployeeDirectory/EmployeeListManager.vue";
 import EmployeeListPublic from "./views/EmployeeDirectory/EmployeeListPublic.vue";
@@ -63,6 +64,11 @@ export default new Router({
           components: { default: ClaimUserList }
         }
       ]
+},
+{
+  path: '/claimrequest',
+  name: 'ClaimRequest',
+  component: ClaimRequest
 },
 {
   path: '/employeedirectory',

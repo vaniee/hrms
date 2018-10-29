@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-toolbar>
+        <v-toolbar color="white" tabs>
           <v-toolbar-title>
             <v-avatar
               slot="activator"
@@ -13,23 +13,47 @@
             <strong v-html="message.name"></strong>
             <div class="sub-info">2018-10-21 14:29:01</div>
           </v-toolbar-title>
-          <v-chip outline color="teal">
+          <v-chip outline color="lime darken-1">
               <v-avatar>
-                <v-icon>check_circle</v-icon>
+                <v-icon>update</v-icon>
               </v-avatar>
-              Approved
+              Pending
             </v-chip>
           <v-spacer></v-spacer>
           <v-toolbar-items>
+            <v-menu bottom left>
+            <v-btn slot="activator" icon>
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile
+                v-for="(item, i) in actions"
+                :key="i">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
             <v-btn icon @click="saveOrCloseClicked()">
               <v-icon>close</v-icon>
             </v-btn>
           </v-toolbar-items>
+          <v-tabs v-model="tabs"
+            slot="extension"
+            slider-color="yellow">
+            <v-tab href="#tab-1">
+              Information
+            </v-tab>
+
+            <v-tab href="#tab-2">
+              History
+            </v-tab>
+          </v-tabs>
         </v-toolbar>
-  <v-card-text>
-          <v-container grid-list-xl>
-            <v-layout row wrap>
-              <v-flex xs12>
+        <v-card-text>
+          <v-tabs-items v-model="tabs">
+            <v-tab-item :id="'tab-' + 1">
+              <v-layout row wrap>
+                <v-flex xs12 sm12 md6>
                   <v-list two-line>
                     <v-list-tile >
                       <v-list-tile-action>
@@ -40,9 +64,7 @@
                         <v-list-tile-title>Anan Khafli</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
-
                      <v-divider inset></v-divider>
-                     
                     <v-list-tile >
                       <v-list-tile-action>
                         <v-icon>receipt</v-icon>
@@ -76,12 +98,9 @@
                         <v-list-tile-sub-title>Application Date</v-list-tile-sub-title>
                         <v-list-tile-title>2018-10-26</v-list-tile-title>
                       </v-list-tile-content>
-                    
                     </v-list-tile>
                     <v-divider inset></v-divider>
-
-                    <v-list-tile xs6 sm4>
-                      
+                    <v-list-tile xs6 sm4>                     
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
                       </v-list-tile-action>
@@ -118,11 +137,51 @@
             </v-list-tile-content>
           </v-list-tile>
           
-        </v-list>               
-              </v-flex>
-              
-            </v-layout>
-        </v-container>
+        </v-list>
+                </v-flex>
+              </v-layout>
+            </v-tab-item>
+            <v-tab-item :id="'tab-' + 2">
+              <v-list two-line>
+                <template v-for="(item, index) in items">
+                  <v-subheader class="subheading"
+                    v-if="item.header"
+                    :key="item.header">
+                    {{ item.header }}
+                  </v-subheader>
+
+                  <v-divider
+                    v-else-if="item.divider"
+                    :inset="item.inset"
+                    :key="index"></v-divider>
+
+                  <v-list-tile
+                    v-else
+                    :key="item.title"
+                    avatar>
+                    <v-list-tile-avatar>
+                      <img :src="item.avatar">
+                    </v-list-tile-avatar>
+
+                    <v-list-tile-content>
+                      <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                      <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                      <v-list-tile-sub-title>
+                        <span @click='item.showComment = !item.showComment' class="clickable">View comment</span>
+                      </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                    <v-tooltip v-model="item.showComment" left max-width="180">
+                        <span slot="activator">&nbsp;</span>
+                        <span>{{item.comment}}</span>
+                    </v-tooltip>
+
+                    <v-icon color="green darken-2">check</v-icon>
+                  </v-list-tile>
+                </template>
+              </v-list>
+            </v-tab-item>
+          </v-tabs-items>
+        
         </v-card-text>
       </v-card>
 </template>
@@ -137,7 +196,7 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class ClaimUserDetail extends Vue {
   public newFormdialog: boolean = false;
   public noDate: any;
-
+public tabs: string = 'tab-1';
   public message: any = {
           avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
           name: 'John Leider',

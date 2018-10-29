@@ -14,15 +14,13 @@
               slot="extension"
               color="white"
               slider-color="yellow">
-        <v-tab href="#tab-1">
-          Overview
-        </v-tab>
 
-        <v-tab href="#tab-2">
+
+        <v-tab href="#tab-1">
           My Request
         </v-tab>
 
-        <v-tab href="#tab-3">
+        <v-tab href="#tab-2">
           Approval
         </v-tab>
 
