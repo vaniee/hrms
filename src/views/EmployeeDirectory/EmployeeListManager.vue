@@ -53,7 +53,7 @@
                         <td class="text-xs-left">{{ props.item.dob }}</td>
                         <td class="text-xs-left">{{ props.item.gender }}</td>
                         <td class="justify-center layout px-0">
-                            <v-btn flat icon @click="dialog = true">
+                            <v-btn flat icon @click="dialog = true; selectedItem = props.item; avatar = props.item.avatar">
                                 <v-icon small>edit</v-icon>
                             </v-btn>
                         </td>
@@ -79,12 +79,6 @@
                                 </v-flex>
                                 <v-flex xs12>
                                     <v-text-field label="Email *" required prepend-icon="email"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6>
-                                    <v-text-field label="Password *" type="password" required prepend-icon="security"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6>
-                                    <v-text-field label="Password *" type="password" required prepend-icon="replay"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12>
                                     <v-select :items="['Male', 'Female']" label="Gender *" required prepend-icon="wc"></v-select>
@@ -139,13 +133,13 @@
                                 Employee Contract
                             </v-tab>
 
-                             <v-tab href="#tab-7">
+                            <v-tab href="#tab-7">
                                 Activity
                             </v-tab>
                         </v-tabs>
                     </v-toolbar>
 
-                    <v-tabs-items v-model="tabs">
+                    <v-tabs-items v-model="tabs" class="grid-input">
                         <v-tab-item v-for="i in 7" :id="'tab-' + i" :key="i">
                             <v-container fluid grid-list-md text-xs-center>
                                 <v-list three-line subheader>
@@ -153,24 +147,66 @@
                                     <v-layout row wrap>
                                         <v-flex xs12 sm9 md9>
                                             <v-list-tile>
-                                                <v-text-field xs12 sm6 md4 label="First name *" required prepend-icon="edit"></v-text-field>
-                                                <v-text-field xs12 sm6 md4 label="Middle name"></v-text-field>
-                                                <v-text-field xs12 sm6 md4 label="Last name *" required></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="First name" label="First name"></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="Middle name" label="Middle name"></v-text-field>
+                                                <v-text-field xs12 sm6 md4 box value="Last name" label="Last name"></v-text-field>
                                             </v-list-tile>
                                             <v-list-tile>
-                                                <v-text-field xs12 sm12 md12 label="Email *" required prepend-icon="email"></v-text-field>
+                                                <v-expansion-panel>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add email</div>
+                                                        <v-card>
+                                                            <v-text-field xs12 sm12 md12 label="Email"></v-text-field>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
                                             </v-list-tile>
                                             <v-list-tile>
-                                                <v-select xs12 sm6 md4 :items="['Male', 'Female']" label="Gender *" required prepend-icon="wc"></v-select>
-                                                <v-select xs12 sm6 md4 :items="['Sweden', 'Vietnam']" label="Nationality" required prepend-icon="home"></v-select>
-                                                <v-select xs12 sm6 md4 :items="['Christianity', 'Buddhism', 'Islam']" label="Religion" required prepend-icon="favorite"></v-select>
+                                                <v-expansion-panel>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add gender</div>
+                                                        <v-card>
+                                                            <v-select :items="['Male', 'Female']" label="Gender"></v-select>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
+                                            </v-list-tile>
+                                            <v-list-tile>
+                                                <v-expansion-panel>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add nationality</div>
+                                                        <v-card>
+                                                            <v-select :items="['Sweden', 'Vietnam']" label="Nationality"></v-select>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
+                                            </v-list-tile>
+                                            <v-list-tile>
+                                                <v-expansion-panel>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add religion</div>
+                                                        <v-card>
+                                                            <v-select :items="['Christianity', 'Buddhism', 'Islam']" label="Religion"></v-select>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
                                             </v-list-tile>
                                         </v-flex>
                                         <v-flex xs12 sm3 md3>
-                                            <v-layout align-center justify-center column fill-height pl-3>
-                                                <v-avatar :size="150">
-                                                    <img src="https://cdn.vuetifyjs.com/images/lists/ali.png" alt="avatar">
-                                                  </v-avatar>
+                                            <v-layout align-start justify-start column fill-height pl-3>
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input type='file' id="imageUpload" @change="readURL">
+                                                        <v-hover>
+                                                            <label for="imageUpload" slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 5}`" class="mx-auto"><v-icon large>add_circle_outline</v-icon></label>
+                                                        </v-hover>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div ref="imagePreview" :style="{ backgroundImage: 'url(' + avatar + ')' }">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </v-layout>
                                         </v-flex>
                                     </v-layout>
@@ -181,15 +217,52 @@
                                     <v-layout row wrap>
                                         <v-flex xs12 sm9 md9>
                                             <v-list-tile>
-                                                <v-text-field xs12 sm1 md1 label="No." required prepend-icon="home"></v-text-field>
-                                                <v-text-field xs12 sm5 md5 label="Street"></v-text-field>
-                                                <v-text-field xs12 sm6 md3 label="Ward" required></v-text-field>
-                                                <v-text-field xs12 sm6 md3 label="District" required></v-text-field>
+                                                <v-text-field xs12 sm1 md1 box value="12" label="No."></v-text-field>
+                                                <v-expansion-panel xs12 sm5 md5>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add street</div>
+                                                        <v-card>
+                                                            <v-text-field xs12 sm12 md12 label="Street"></v-text-field>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
+                                                <v-expansion-panel xs12 sm5 md5>
+                                                    <v-expansion-panel-content expand-icon="remove">
+                                                        <div slot="header">Add ward</div>
+                                                        <v-card>
+                                                            <v-text-field xs12 sm12 md12 label="Ward"></v-text-field>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
+                                                <v-text-field xs12 sm6 md3 box value="Distric 1" label="District"></v-text-field>
                                             </v-list-tile>
                                             <v-list-tile>
-                                                <v-text-field xs12 sm1 md1 label="City" required prepend-icon="location_city"></v-text-field>
-                                                <v-select xs12 sm6 md4 :items="['Sweden', 'Vietnam']" label="Country" required prepend-icon="location_on"></v-select>
-                                                <v-select xs12 sm6 md4 :items="['Hà Nội', 'TP Hồ Chí Minh']" label="Province" required prepend-icon="location_on"></v-select>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-expansion-panel xs12 sm1 md1>
+                                                        <v-expansion-panel-content expand-icon="remove">
+                                                            <div slot="header">Add city</div>
+                                                            <v-card>
+                                                                <v-text-field xs12 sm12 md12 label="City"></v-text-field>
+                                                            </v-card>
+                                                        </v-expansion-panel-content>
+                                                    </v-expansion-panel>
+                                                </v-flex>
+
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-expansion-panel>
+                                                        <v-expansion-panel-content expand-icon="remove">
+                                                            <div slot="header">Add country</div>
+                                                            <v-card>
+                                                                <v-select :items="['Sweden', 'Vietnam']" label="Country"></v-select>
+                                                            </v-card>
+                                                        </v-expansion-panel-content>
+                                                    </v-expansion-panel>
+                                                </v-flex>
+
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-select :items="['Hà Nội', 'TP Hồ Chí Minh']" value="Hà Nội" label="Province"></v-select>
+                                                </v-flex>
+
                                             </v-list-tile>
                                         </v-flex>
                                     </v-layout>
@@ -306,6 +379,26 @@ export default class EmployeeListPublic extends Vue {
     constructor() {
         super();
     }
+    public selectedItem: any = {
+        value: false,
+        avatar: '',
+        name: '',
+        department: '',
+        email: '',
+        job: '',
+        address: ''
+    };
+
+    public readURL(input) {
+        let file = input.target.files;
+
+        if (file && file[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file[0]);
+            this.avatar = reader.result;
+        }
+    }
+    public avatar: any = null;
 
     public notifications: any = null;
     public sound: any = null;
@@ -361,49 +454,48 @@ export default class EmployeeListPublic extends Vue {
 
     ];
     public dataTable: any = [{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        },{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        },{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        },{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        },{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        },{
-            value: false,
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
-            name: 'Sara Laurent',
-            department: 'Sweden HR Department',
-            dob: 'May 17, 1985',
-            gender: 'Female',
-        }
-    ]
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/ali.png',
+        name: 'Sara Laurent',
+        department: 'Sweden HR Department',
+        dob: 'Nov 2, 1980',
+        gender: 'Female',
+    }, {
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+        name: 'Phan Văn Thịnh',
+        department: 'Vietnam IT Department',
+        dob: 'Jul 23, 1983	',
+        gender: 'Male',
+    }, {
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+        name: 'Travis Howard',
+        department: 'Sweden HR Department',
+        dob: 'May 17, 1985',
+        gender: 'Female',
+    }, {
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+        name: 'Jessica Karen',
+        department: 'Sweden HR Department',
+        dob: 'Jun 29, 2018	',
+        gender: 'Female',
+    }, {
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+        name: 'John Mallett',
+        department: 'Sweden HR Department',
+        dob: 'Jul 23, 1983',
+        gender: 'Male',
+    }, {
+        value: false,
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+        name: 'Mary Johnson',
+        department: 'Vietnam IT Department',
+        dob: 'Jun 13, 1982',
+        gender: 'Female',
+    }]
 
     public changeSort(column) {
         if (this.pagination.sortBy === column) {
@@ -417,12 +509,80 @@ export default class EmployeeListPublic extends Vue {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+.grid-input {
+    .v-text-field--box {
+        .v-input__slot {
+            padding-left: 0 !important;
+            background: transparent !important;
+
+            &:hover {
+                background: transparent !important;
+            }
+        }
+    }
+}
+</style><style lang="less" scoped>
 nav.v-toolbar.theme--light.white {
     box-shadow: none;
 }
 
 .v-card__title {
     background: #fff;
+}
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+
+    .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+
+        input {
+            display: none;
+
+            +label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                cursor: pointer;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    background: #f1f1f1;
+                    border-color: #d6d6d6;
+                }
+            }
+        }
+    }
+
+    .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+
+        >div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
 }
 </style>
