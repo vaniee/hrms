@@ -119,10 +119,9 @@
             <v-flex xs12>
                 <div>
                   <h3>Upload Document</h3>
-                    <input type="file">
+                    <input class="fileUpload" type="file" ref="fileUpload">
                 </div>
             </v-flex>
-            
             </v-layout>
           </v-container>
         </v-card-text>
@@ -162,6 +161,7 @@ export default class ClaimNewForm extends Vue {
   public mounted() {
    
   }
+
   public onCalendarSelected() {
     if (this.checkThatDate(this.noDate)) {
       this.leaveInfoOnDate = true;
@@ -180,5 +180,7 @@ export default class ClaimNewForm extends Vue {
 </script>
 
 <style>
-
+.fileUpload{
+  color: 'red';
+}
 </style>

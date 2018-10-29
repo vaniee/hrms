@@ -17,7 +17,6 @@
               <v-avatar>
                 <v-icon>update</v-icon>
               </v-avatar>
-              Pending
             </v-chip>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -43,7 +42,6 @@
             <v-tab href="#tab-1">
               Information
             </v-tab>
-
             <v-tab href="#tab-2">
               History
             </v-tab>
@@ -53,7 +51,7 @@
           <v-tabs-items v-model="tabs">
             <v-tab-item :id="'tab-' + 1">
               <v-layout row wrap>
-                <v-flex xs12 sm12 md6>
+                <v-flex xs12>
                   <v-list two-line>
                     <v-list-tile >
                       <v-list-tile-action>
@@ -89,7 +87,7 @@
 
                     <v-divider inset></v-divider>
 
-                    <v-list-tile xs6 sm4>
+                    <v-list-tile xs6>
                       
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
@@ -100,7 +98,7 @@
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-divider inset></v-divider>
-                    <v-list-tile xs6 sm4>                     
+                    <v-list-tile xs6>                     
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
                       </v-list-tile-action>
@@ -110,7 +108,8 @@
                       </v-list-tile-content>
                     
                     </v-list-tile>
-                    <v-list-tile xs6 sm4>
+                     <v-divider inset></v-divider>
+                    <v-list-tile xs6>
                       <v-list-tile-action>
                         <v-icon>list</v-icon>
                       </v-list-tile-action>
@@ -242,6 +241,10 @@ public items: any[] = [
     showComment: false,
     comment: "Do you have Paris recommendations? Have you ever been?",
     }
+];
+public actions: any[] = [
+  { title: 'Edit' },
+  { title: 'Delete' }
 ];
 public items1: any[] = [
           { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Photos', subtitle: 'Jan 9, 2014' },

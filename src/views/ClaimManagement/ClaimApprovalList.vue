@@ -73,10 +73,10 @@
           <v-avatar
               slot="activator"
               size="36px">
-              <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+              <img :src="props.item.avatar"
                 alt="Avatar">
           </v-avatar>
-          <span> Johnathan Frozen Yogurt: "Hotel Costs" - 700000 VND</span>
+          <span>{{ props.item.name }}: {{props.item.claimType}} - {{props.item.total}} VND</span>
         </v-card-text>
 
         <v-layout wrap class="brief-info">

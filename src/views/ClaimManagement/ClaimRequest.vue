@@ -2,6 +2,25 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card class="margin-top-5">
+        <v-toolbar color="white" flat>
+          <v-toolbar-title>Claim Quick Access</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-menu bottom left>
+              <v-btn slot="activator" icon>
+                <v-icon>filter_list</v-icon>
+              </v-btn>
+              <v-list>
+               <v-list-tile
+                  v-for="(item, i) in filterOptions"
+                  :key="i">
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </v-toolbar-items>
+        </v-toolbar>
+
         <v-list>
           <v-list-group
             v-for="item in items"
@@ -16,6 +35,7 @@
                 <v-list-tile-title v-html="item.title"></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
               </v-list-tile-content>
+               <v-icon :color="item.color">{{item.status}}</v-icon>
             </v-list-tile>
 
             <v-list-tile >
@@ -24,7 +44,7 @@
                       </v-list-tile-action>
                       <v-list-tile-content>
                           <v-list-tile-sub-title>Apply To</v-list-tile-sub-title>
-                        <v-list-tile-title>Anan Khafli</v-list-tile-title>
+                        <v-list-tile-title>{{item.applyto}}</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
@@ -35,7 +55,7 @@
                       </v-list-tile-action>
                       <v-list-tile-content>
                           <v-list-tile-sub-title>Claim Type</v-list-tile-sub-title>
-                        <v-list-tile-title>Business Trip</v-list-tile-title>
+                        <v-list-tile-title>{{item.type}}</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
 
@@ -83,10 +103,19 @@
                       </v-list-tile-action>
                       <v-list-tile-content>
                         <v-list-tile-sub-title>Expense Item</v-list-tile-sub-title>
-                        <v-list-tile-title>Food</v-list-tile-title>
+                        <v-list-tile-title>{{item.expenseitem}}</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
           </v-list-group>
+
+          <v-list-tile>
+            <v-spacer></v-spacer>
+            <v-list-tile-action>
+              <v-btn flat>
+                <span>View all</span>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
         </v-list>
       </v-card>
     </v-flex>
@@ -108,31 +137,56 @@ public items: any[] = [
     no: '1',
     title: 'Jason Oner <span class="grey--text text--lighten-1">(Insurance)</span>',
     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    subtitle: "2018-10-19 14:29:01"
+    subtitle: "2018-10-19 14:29:01",
+    active: true,
+    status: 'check',
+    color: 'green darken-2',
+    applyto:'Jason Oner',
+    type: 'Insurance',
+    expenseitem: 'Prescription'
     },
     {
     no: '2',
     title: 'Ranee Carlson <span class="grey--text text--lighten-1">(Business Trip)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
     subtitle: "2018-10-11 14:29:08",
-    active: true
+    status: 'update',
+    color: 'lime darken-1',
+    applyto:'Ranee Carlson',
+    type: 'Business Trip',
+    expenseitem: 'Bill'
     },
     {
     no: '3',
     title: 'Cindy Baker <span class="grey--text text--lighten-1">(Business Trip)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    subtitle: "2018-10-02 14:29:36"
+    subtitle: "2018-10-02 14:29:36",
+    status: 'close',
+    color: 'red darken-2',
+    applyto:'Cindy Baker',
+    type: 'Business Trip',
+    expenseitem: 'Bill'
     },
     {
     no: '4',
     title: 'Ali Connors <span class="grey--text text--lighten-1">(Travel Costs)</span>', 
     avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    subtitle: "2018-09-03 08:29:01"
+    subtitle: "2018-09-03 08:29:01",
+    status: 'check',
+    color: 'green darken-2',
+    applyto:'Ali Connors',
+    type: 'Travel Costs',
+    expenseitem: 'Bill'
     }
 ];
 public noDate: any;
 public markedDates: number[] = [];
 public leaveInfoOnDate: boolean = false;
+public filterOptions: any[] = [
+  { title: '1 Month' },
+  { title: '3 Months' },
+  { title: '6 Months' }
+];
 public message: any =[ 
   {
     avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',

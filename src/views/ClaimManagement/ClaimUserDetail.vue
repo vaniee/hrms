@@ -22,9 +22,6 @@
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-menu bottom left>
-            <v-btn slot="activator" icon>
-              <v-icon>more_vert</v-icon>
-            </v-btn>
             <v-list>
               <v-list-tile
                 v-for="(item, i) in actions"
@@ -53,7 +50,7 @@
           <v-tabs-items v-model="tabs">
             <v-tab-item :id="'tab-' + 1">
               <v-layout row wrap>
-                <v-flex xs12 sm12 md6>
+                <v-flex xs12>
                   <v-list two-line>
                     <v-list-tile >
                       <v-list-tile-action>
@@ -89,7 +86,7 @@
 
                     <v-divider inset></v-divider>
 
-                    <v-list-tile xs6 sm4>
+                    <v-list-tile xs6>
                       
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
@@ -100,7 +97,7 @@
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-divider inset></v-divider>
-                    <v-list-tile xs6 sm4>                     
+                    <v-list-tile xs6>                     
                       <v-list-tile-action>
                         <v-icon>date_range</v-icon>
                       </v-list-tile-action>
@@ -110,7 +107,8 @@
                       </v-list-tile-content>
                     
                     </v-list-tile>
-                    <v-list-tile xs6 sm4>
+                    <v-divider inset></v-divider>
+                    <v-list-tile xs6>
                       <v-list-tile-action>
                         <v-icon>list</v-icon>
                       </v-list-tile-action>
