@@ -118,8 +118,9 @@
               </v-flex>
             <v-flex xs12>
                 <div>
-                  <h3>Upload Document</h3>
-                    <input class="fileUpload" type="file" ref="fileUpload">
+                  <input type="file" ref="file" style="display: none">
+                    <v-btn color="blue-grey" class="white--text" @click="$refs.file.click()">upload... <v-icon right dark>cloud_upload</v-icon>
+                    </v-btn>
                 </div>
             </v-flex>
             </v-layout>
@@ -180,7 +181,5 @@ export default class ClaimNewForm extends Vue {
 </script>
 
 <style>
-.fileUpload{
-  color: 'red';
-}
+
 </style>

@@ -12,11 +12,7 @@
             </v-toolbar-items>
             <v-menu bottom right offset-y>
               
-              <v-list>
-                <v-list-tile v-for="(item, i) in items" :key="i" @click="0">
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
+    
             </v-menu>
           </v-toolbar>
           <v-card-text>
