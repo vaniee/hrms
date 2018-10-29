@@ -124,7 +124,7 @@
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile
-            v-for="item in leaveTypes"
+            v-for="item in type"
             :key="item.title"
             ripple
             avatar>
@@ -155,7 +155,38 @@
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile
-            v-for="item in leaveTypes"
+            v-for="item in currency"
+            :key="item.title"
+            ripple
+            avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title v-html="item.title"></v-list-tile-title>
+              <v-list-tile-sub-title>{{item.status}}</v-list-tile-sub-title>
+            </v-list-tile-content>
+
+            <v-list-tile-action>
+              <v-icon class="clickable">edit</v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+
+          <v-list-tile>
+            <v-spacer></v-spacer>
+            <v-list-tile-action>
+              <span class="clickable">Show all</span>
+            </v-list-tile-action>
+          </v-list-tile>
+
+          <v-list-tile>
+            <v-list-tile-avatar>
+              <v-icon class="font-size-action clickable">add_circle</v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              Add Expense Item
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile
+            v-for="item in expenseitem"
             :key="item.title"
             ripple
             avatar>
@@ -195,6 +226,29 @@ public notifications: boolean = false;
 public sound: boolean = true;
 public widgets: boolean = false
 
+public people: any[] = [
+  { active: false, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', role: 'Approver' },
+  { active: false, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', role: 'Administrator' },
+  { active: false, title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', role: 'Approver' },
+  { active: false, title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', role: 'Manager' }
+];
+
+public type: any[] = [
+  { title: 'Business Trip (BT)', code: 'BT', status: 'Active' },
+  { title: 'Health Insurance (HI)', code: 'HI', status: 'Inactive' },
+  { title: 'Travel Expenses (TE)', code: 'TE', status: 'Active' }
+];
+
+public expenseitem: any[] = [
+  { title: 'Food', status: 'Active' },
+  { title: 'Taxi', status: 'Active' }
+];
+
+public currency: any[] = [
+  { title: 'VND', status: 'Active' },
+  { title: 'HKD', status: 'Active' },
+  { title: 'USD', status: 'Active' }
+];
 constructor() {
     super();
   }
