@@ -17,6 +17,7 @@
               <v-avatar>
                 <v-icon>update</v-icon>
               </v-avatar>
+              Pending
             </v-chip>
           <v-spacer></v-spacer>
           <v-toolbar-items>

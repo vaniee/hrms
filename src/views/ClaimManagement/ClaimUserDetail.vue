@@ -13,11 +13,11 @@
             <strong v-html="message.name"></strong>
             <div class="sub-info">2018-10-21 14:29:01</div>
           </v-toolbar-title>
-          <v-chip outline color="lime darken-1">
+          <v-chip outline color="green darken-1">
               <v-avatar>
-                <v-icon>update</v-icon>
+                <v-icon>check</v-icon>
               </v-avatar>
-              Pending
+              Approved
             </v-chip>
           <v-spacer></v-spacer>
           <v-toolbar-items>

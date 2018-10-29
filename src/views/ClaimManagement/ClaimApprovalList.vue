@@ -70,13 +70,7 @@
       <template slot="expand" slot-scope="props">
       <v-card flat>
         <v-card-text>
-          <v-avatar
-              slot="activator"
-              size="36px">
-              <img :src="props.item.avatar"
-                alt="Avatar">
-          </v-avatar>
-          <span>{{ props.item.name }}: {{props.item.claimType}} - {{props.item.total}} VND</span>
+          <span>"{{ props.item.comment}}"</span>
         </v-card-text>
 
         <v-layout wrap class="brief-info">
@@ -145,47 +139,52 @@ export default class ClaimApprovalList extends Vue {
       claimType: "Sick Claim",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
+      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+      comment:'I would like to request that Generally company review the category that Dr.John services have been placed into'
     },
     {
       value: false,
       name: 'Ice cream sandwich',
       startDate: "2018-09-12",
       total: 900000,
-      claimType: "Vacation Claim",
+      claimType: "Business Trip",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+      comment:'Thank you in advance for your cooperation'
     },
     {
       value: false,
       name: 'Margaret E. Gillespie',
       startDate: "2018-08-01",
       total: 400000,
-      claimType: "Sick Claim",
+      claimType: "Health Check",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+      comment:'Receipts will be sent later'
     },
     {
       value: false,
       name: 'Darrel K. Nieves',
       startDate: "2018-02-25",
       total: 100000,
-      claimType: "Vacation Claim",
+      claimType: "Hotel Costs",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+      comment:'Thank you in advance for your cooperation'
     },
     {
       value: false,
       name: 'Adrian Merrill',
       startDate: "2018-09-12",
       total: 69000,
-      claimType: "Sick Claim",
+      claimType: "Business Trip",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+      comment:'Thank you for your thorough consideration of this matter'
     },
     {
       value: false,
@@ -195,47 +194,52 @@ export default class ClaimApprovalList extends Vue {
       claimType: "Business Trip",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+      comment:'Thank you for your assistance'
     },
     {
       value: false,
       name: 'Moses Mcconnell',
       startDate: "2018-10-12",
       total: 30000000,
-      claimType: "Vacation Leave",
+      claimType: "Insurance",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+      comment:'Thank you for your assistance'
     },
     {
       value: false,
       name: 'Honeycomb',
       startDate: "2018-10-12",
       total: "400000000",
-      claimType: "Sick Leave",
+      claimType: "Insurance",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+      comment:'Thank you for your assistance'
     },
     {
       value: false,
       name: 'Moses C. Molina',
       startDate: "2018-10-05",
       total: 60000000,
-      claimType: "Sick Leave",
+      claimType: "Travel Costs",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+      comment:'Please feel free to contact me if you have any questions or need any further information. Thank you for your assistance'
     },
     {
       value: false,
       name: 'Zorita Schneider',
       startDate: "2018-10-09",
       total: 36000000,
-      claimType: "Business Trip",
+      claimType: "Taxi",
       submitDate: "2018-09-19",
       status: 'Pending',
-      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
+      avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+      comment:'Thank you in advance for your cooperation'
     }
   ];
   public search: string = '';
