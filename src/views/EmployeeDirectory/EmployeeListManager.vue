@@ -363,6 +363,144 @@
 
         </v-flex>
     </v-layout>
+
+    <v-layout row justify-center>
+        <v-dialog v-model="addUserForm" scrollable max-width="800px" persistent>
+            <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
+            <v-card>
+                <v-card-title>
+                    <v-layout align-center justify-start row fill-height>
+                        <span xs8 class="headline">Add new Sharepoint User</span>
+                        <v-spacer></v-spacer>
+                        <v-flex xs4>
+                            <v-autocomplete v-model="usersPicker" :items="people" placeholder="Select Sharepoint user" class="people-picker" item-text="name" item-value="name">
+                                <template slot="selection" slot-scope="data">
+                                    <v-chip :selected="data.selected" close @input="remove()" class="chip--select-multi">
+                                        <v-avatar>
+                                            <img :src="data.item.avatar">
+                                                </v-avatar>
+                                            {{ data.item.name }}
+                                    </v-chip>
+                                </template>
+                                <template slot="item" slot-scope="data">
+                                    <template v-if="typeof data.item !== 'object'">
+                                        <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                                    </template>
+                                    <template v-else>
+                                        <v-list-tile-avatar>
+                                            <img :src="data.item.avatar">
+                                                </v-list-tile-avatar>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                                                <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
+                                            </v-list-tile-content>
+                                    </template>
+                                </template>
+                            </v-autocomplete>
+                        </v-flex>
+                    </v-layout>
+
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-card-text class="grid-input">
+                    <v-list three-line>
+                        <v-layout align-start justify-center row fill-height>
+                            <v-flex xs12 sm8 md8>
+                                <v-list-tile>
+                                    <v-text-field xs12 sm6 md4 box value="Jessica " label="First name"></v-text-field>
+                                    <v-text-field xs12 sm6 md4 box value="K." label="Middle name"></v-text-field>
+                                    <v-text-field xs12 sm6 md4 box value="Karen" label="Last name"></v-text-field>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-flex xs12 sm12 md12>
+                                        <v-menu :close-on-content-click="false" v-model="birthDatePicker" lazy transition="scale-transition" offset-y full-width min-width="290px" class="datePicker">
+                                            <v-text-field slot="activator" v-model="birthDate" label="Birthday" readonly></v-text-field>
+                                            <v-date-picker v-model="birthDate" @input="birthDatePicker = false"></v-date-picker>
+                                        </v-menu>
+                                    </v-flex>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-expansion-panel>
+                                        <v-expansion-panel-content expand-icon="remove">
+                                            <div slot="header">Add email</div>
+                                            <v-card>
+                                                <v-text-field label="Email" ref="input"></v-text-field>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-expansion-panel>
+                                        <v-expansion-panel-content expand-icon="remove">
+                                            <div slot="header">Add phone</div>
+                                            <v-card>
+                                                <v-text-field label="Phone"></v-text-field>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-expansion-panel>
+                                        <v-expansion-panel-content expand-icon="remove">
+                                            <div slot="header">Add gender</div>
+                                            <v-card>
+                                                <v-select :items="['Male', 'Female']" label="Gender"></v-select>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-expansion-panel>
+                                        <v-expansion-panel-content expand-icon="remove">
+                                            <div slot="header">Add positon</div>
+                                            <v-card>
+                                                <v-select :items="['Developer', 'Manager']" label="Positon"></v-select>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-expansion-panel>
+                                        <v-expansion-panel-content expand-icon="remove">
+                                            <div slot="header">Add nationality</div>
+                                            <v-card>
+                                                <v-select :items="['Sweden', 'Vietnam']" label="Nationality"></v-select>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-list-tile>
+                            </v-flex>
+                            <v-flex xs12 sm4 md4>
+                                <v-layout align-start justify-start column fill-height pl-3>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" @change="readURL">
+                                            <v-hover>
+                                                <label for="imageUpload" slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 5}`" class="mx-auto"><v-icon large>add_circle_outline</v-icon></label>
+                                            </v-hover>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div ref="imagePreview" :style="{ backgroundImage: 'url(' + avatar + ')' }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </v-layout>
+                            </v-flex>
+                        </v-layout>
+                    </v-list>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn flat @click.native="addUserForm = false">Close</v-btn>
+                    <v-btn flat @click.native="addUserForm = false">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-layout>
+
 </v-app>
 </template>
 
@@ -379,6 +517,76 @@ export default class EmployeeListPublic extends Vue {
     constructor() {
         super();
     }
+
+    public addUserForm: any = false;
+    public usersPicker: any = null;
+    public birthDatePicker: any = null;
+
+    public birthDate: any = new Date().toISOString().substr(0, 10);
+
+    public srcs: any = {
+        1: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+        2: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+        3: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+        4: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+        5: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
+    }
+
+    public people: any = [{
+            header: 'Group 1'
+        },
+        {
+            name: 'Sandra Adams',
+            group: 'Group 1',
+            avatar: this.srcs[1]
+        },
+        {
+            name: 'Ali Connors',
+            group: 'Group 1',
+            avatar: this.srcs[2]
+        },
+        {
+            name: 'Trevor Hansen',
+            group: 'Group 1',
+            avatar: this.srcs[3]
+        },
+        {
+            name: 'Tucker Smith',
+            group: 'Group 1',
+            avatar: this.srcs[2]
+        },
+        {
+            divider: true
+        },
+        {
+            header: 'Group 2'
+        },
+        {
+            name: 'Britta Holt',
+            group: 'Group 2',
+            avatar: this.srcs[4]
+        },
+        {
+            name: 'Jane Smith ',
+            group: 'Group 2',
+            avatar: this.srcs[5]
+        },
+        {
+            name: 'John Smith',
+            group: 'Group 2',
+            avatar: this.srcs[1]
+        },
+        {
+            name: 'Sandra Williams',
+            group: 'Group 2',
+            avatar: this.srcs[3]
+        }
+    ]
+
+    public remove() {
+        this.usersPicker = null;
+    }
+
     public selectedItem: any = {
         value: false,
         avatar: '',
@@ -510,6 +718,40 @@ export default class EmployeeListPublic extends Vue {
 </script>
 
 <style lang="less">
+.people-picker {
+    &.v-autocomplete {
+        padding-top: 0;
+
+        &.v-input--is-dirty {
+            .v-input__slot {
+                margin-bottom: 0;
+
+                &:before,
+                &:after {
+                    display: none;
+                }
+            }
+        }
+
+        .v-text-field__details {
+            display: none;
+        }
+    }
+
+    &.v-select .v-chip {
+        width: 100%;
+
+        +input {
+            display: none;
+        }
+
+        .v-chip__close {
+            position: absolute;
+            right: 5px;
+        }
+    }
+}
+
 .grid-input {
     .v-text-field--box {
         .v-input__slot {
@@ -603,6 +845,11 @@ export default class EmployeeListPublic extends Vue {
             display: none !important;
         }
     }
+
+    .v-menu.datePicker .v-input .v-label {
+        margin-top: 0px;
+    }
+
 }
 </style><style lang="less" scoped>
 nav.v-toolbar.theme--light.white {
@@ -616,7 +863,7 @@ nav.v-toolbar.theme--light.white {
 .avatar-upload {
     position: relative;
     max-width: 205px;
-    margin: 50px auto;
+    margin: auto;
 
     .avatar-edit {
         position: absolute;
